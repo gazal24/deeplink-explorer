@@ -8,21 +8,21 @@ export const generateDeeplink = (config: DeeplinkConfig): string => {
     return '';
   }
 
-  // Encode the route for URL safety (especially for routes with | symbol)
-  const encodedRoute = encodeURIComponent(flowType);
-  
-  // Base deeplink following the structure from the guide
-  const baseDeeplink = `https://upswing.access.partner/${partner.code}?action=webview&redirect=${encodedRoute}`;
-  
   // Get Firebase host for the partner
   const firebaseHost = getPartnerFirebaseHost(partner.code);
   
   // If Firebase host is configured, use Firebase Dynamic Link format
   if (firebaseHost) {
-    // Firebase Dynamic Links use ?link= parameter for the target URL
-    return `https://${firebaseHost}?link=${encodeURIComponent(baseDeeplink)}`;
+    // For Firebase Dynamic Links, we need to construct the target URL differently
+    // The Firebase link should redirect to the Upswing deeplink
+    const encodedRoute = encodeURIComponent(flowType);
+    const targetUrl = `https://upswing.access.partner/${partner.code}?action=webview&redirect=${encodedRoute}`;
+    
+    // Firebase Dynamic Links format
+    return `https://${firebaseHost}?link=${encodeURIComponent(targetUrl)}`;
   }
   
-  // Otherwise, return the standard deeplink
-  return baseDeeplink;
+  // For standard deeplinks, encode the route for URL safety
+  const encodedRoute = encodeURIComponent(flowType);
+  return `https://upswing.access.partner/${partner.code}?action=webview&redirect=${encodedRoute}`;
 };
