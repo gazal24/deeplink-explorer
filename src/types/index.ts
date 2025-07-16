@@ -1,6 +1,7 @@
 export interface PartnerCode {
   name: string;
   code: string;
+  firebaseHost?: string;
 }
 
 export interface DeeplinkConfig {
@@ -17,4 +18,10 @@ export interface DeeplinkTemplate {
 
 export interface DeeplinkConfigMap {
   [partnerCode: string]: DeeplinkTemplate;
+}
+
+export interface PartnerFirebaseConfig {
+  [partnerCode: string]: {
+    firebaseHost: string;
+  };
 }

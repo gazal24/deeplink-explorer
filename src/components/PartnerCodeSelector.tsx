@@ -1,5 +1,6 @@
 import React from 'react';
 import { PartnerCode } from '../types';
+import { getPartnerFirebaseHost } from '../utils/firebaseConfig';
 
 interface PartnerCodeSelectorProps {
   selectedPartner: PartnerCode;
@@ -11,14 +12,14 @@ const PartnerCodeSelector: React.FC<PartnerCodeSelectorProps> = ({
   onPartnerSelect
 }) => {
   const partnerCodes: PartnerCode[] = [
-    { name: 'Edhas', code: 'EDHS' },
+    { name: 'Edhas', code: 'EDHS', firebaseHost: getPartnerFirebaseHost('EDHS') || undefined },
     { name: 'Acme Corp', code: 'ACME' },
     { name: 'Acme Corp 2', code: 'ACMT' },
     { name: 'Acme Corp 3', code: 'ACM3' },
     { name: 'Acme Corp 4', code: 'ACM4' },
     { name: 'Tata Moneyfy', code: 'TCMF' },
     { name: 'Tata Neu', code: 'TNEU' },
-    { name: 'Stable Money', code: 'STBM' },
+    { name: 'Stable Money', code: 'STBM', firebaseHost: getPartnerFirebaseHost('STBM') || undefined },
     { name: 'Onsurity', code: 'ONSR' },
     { name: 'Moneycontrol', code: 'MNCT' },
     { name: 'Ventura Wealth', code: 'VNTR' },
@@ -90,6 +91,7 @@ const PartnerCodeSelector: React.FC<PartnerCodeSelectorProps> = ({
         {partnerCodes.map(partner => (
           <option key={partner.code} value={partner.code}>
             {partner.name} ({partner.code})
+            {partner.firebaseHost && ` - Firebase: ${partner.firebaseHost}`}
           </option>
         ))}
       </select>

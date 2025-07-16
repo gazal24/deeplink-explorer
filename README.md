@@ -26,7 +26,8 @@ This tool is designed for Upswing partners to:
 - **DeeplinkTemplate** - Template structure for deeplinks (currently unused)
 
 ### Utils (`src/utils/`)
-- **deeplinkGenerator.ts** - Core logic for generating deeplinks
+- **deeplinkGenerator.ts** - Core logic for generating deeplinks with Firebase host support
+- **firebaseConfig.ts** - Partner-specific Firebase host configuration
 - **csvParser.ts** - CSV parsing utilities (currently unused)
 - **deeplinkConfig.ts** - Configuration mappings (currently unused)
 
@@ -48,19 +49,37 @@ Flow types are based on the `deeplink-guide.pdf` documentation and include:
 - **Special FD Categories**: Senior citizen, safest FDs, high return FDs, tax saver FDs
 
 ## Deeplink Structure
-Based on the official Upswing SDK documentation:
+Based on the official Upswing SDK documentation with Firebase host support:
 
+### Standard Deeplink
 ```
 https://upswing.access.partner/${partnerCode}?action=webview&redirect=${route}
+```
+
+### Firebase Host Deeplink (for configured partners)
+```
+https://${firebaseHost}/${encodeURIComponent(baseDeeplink)}
 ```
 
 Where:
 - `partnerCode` - Partner code from the YAML definitions
 - `route` - Specific SDK section route (URL encoded)
+- `firebaseHost` - Partner-specific Firebase host (e.g., stablemoney.page.link)
+
+### Firebase Host Configuration
+Partners with Firebase hosts configured:
+- **Stable Money (STBM)**: `stablemoney.page.link`
+- **Edhas (EDHS)**: `edhas.page.link`
 
 ### Example Deeplinks
+
+#### Standard Deeplinks
 - Help Center: `https://upswing.access.partner/ACME?action=webview&redirect=deeplink-manager%2Ffd%2FOPEN_HELP_CENTER`
 - Multiple Banks: `https://upswing.access.partner/PHPE?action=webview&redirect=deeplink-manager%2Ffd%2FFSI_FILTER%3FfsiList%3DUTKSIN%7CSMCBIN`
+
+#### Firebase Host Deeplinks
+- Stable Money Help Center: `https://stablemoney.page.link/https%3A%2F%2Fupswing.access.partner%2FSTBM%3Faction%3Dwebview%26redirect%3Ddeeplink-manager%252Ffd%252FOPEN_HELP_CENTER`
+- Edhas My Investments: `https://edhas.page.link/https%3A%2F%2Fupswing.access.partner%2FEDHS%3Faction%3Dwebview%26redirect%3Ddeeplink-manager%252Ffd%252FVIEW_INVESTMENTS`
 
 ## Key Features
 
