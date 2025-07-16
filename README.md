@@ -1,46 +1,125 @@
-# Getting Started with Create React App
+# Deeplink Explorer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+A React TypeScript application that helps partners generate and test deeplinks for the Upswing SDK. The app provides a user-friendly interface to select various parameters and generates properly formatted deeplinks that can be used to launch specific sections of the Upswing mobile SDK.
 
-## Available Scripts
+## Purpose
+This tool is designed for Upswing partners to:
+- Generate deeplinks for different SDK sections (FD flows, help center, investments, etc.)
+- Test deeplinks before implementing them in their applications
+- Understand the deeplink structure and available parameters
+- Quickly access different SDK flows without manual URL construction
 
-In the project directory, you can run:
+## App Structure
+
+### Components (`src/components/`)
+- **DeeplinkGenerator.tsx** - Main component that orchestrates the entire flow
+- **PartnerCodeSelector.tsx** - Dropdown for selecting partner codes (54+ real partners)
+- **DeviceSelector.tsx** - Chip-style selector for iOS/Android (currently for UI only)
+- **ProductTypeSelector.tsx** - Chip-style selector for FD/PL/SCC product types
+- **FlowTypeSelector.tsx** - Dropdown for SDK flow types (14 different flows)
+- **DeeplinkButton.tsx** - Button component for opening/copying generated deeplinks
+
+### Types (`src/types/`)
+- **PartnerCode** - Interface for partner name and code
+- **DeeplinkConfig** - Configuration object for deeplink generation
+- **DeeplinkTemplate** - Template structure for deeplinks (currently unused)
+
+### Utils (`src/utils/`)
+- **deeplinkGenerator.ts** - Core logic for generating deeplinks
+- **csvParser.ts** - CSV parsing utilities (currently unused)
+- **deeplinkConfig.ts** - Configuration mappings (currently unused)
+
+## Data Sources
+
+### Partner Codes
+Partner codes are sourced from `partner-definitions.yaml` and hardcoded in `PartnerCodeSelector.tsx`. The YAML file contains 54+ real partner definitions including:
+- Financial institutions (Tata Moneyfy, Zerodha, etc.)
+- Fintech companies (PhonePe, Paytm Money, Cred, etc.)
+- Banks and lending platforms
+- Investment platforms
+
+### Flow Types
+Flow types are based on the `deeplink-guide.pdf` documentation and include:
+- **Bank Selection**: Single/Multiple bank selection with FSI filters
+- **My Investments**: View investments with different sections (Booked, Pending, Matured)
+- **Transactions**: View all transactions
+- **Support**: View tickets, create tickets, help center
+- **Special FD Categories**: Senior citizen, safest FDs, high return FDs, tax saver FDs
+
+## Deeplink Structure
+Based on the official Upswing SDK documentation:
+
+```
+https://upswing.access.partner/${partnerCode}?action=webview&redirect=${route}
+```
+
+Where:
+- `partnerCode` - Partner code from the YAML definitions
+- `route` - Specific SDK section route (URL encoded)
+
+### Example Deeplinks
+- Help Center: `https://upswing.access.partner/ACME?action=webview&redirect=deeplink-manager%2Ffd%2FOPEN_HELP_CENTER`
+- Multiple Banks: `https://upswing.access.partner/PHPE?action=webview&redirect=deeplink-manager%2Ffd%2FFSI_FILTER%3FfsiList%3DUTKSIN%7CSMCBIN`
+
+## Key Features
+
+### User Interface
+- Clean, responsive design with proper spacing and typography
+- Chip-style selectors for Device and Product Type (better UX than dropdowns)
+- Dropdown selectors for Partner Code and Flow Type (better for many options)
+- Real-time deeplink preview
+- Copy to clipboard functionality
+- "Open Deeplink" button for testing
+
+### Technical Features
+- TypeScript for type safety
+- Proper URL encoding for special characters (especially `|` symbols)
+- Maintainable code structure with separation of concerns
+- CSS styling with hover effects and active states
+
+## Development Notes
+
+### Current State
+- All core functionality is implemented and working
+- Partner codes are hardcoded from YAML file (54+ partners)
+- Flow types are hardcoded from PDF guide (14 flows)
+- Device selection is UI-only (doesn't affect deeplink generation)
+- Product type selection is available but not currently used in deeplink generation
+
+### Potential Improvements
+- Move partner codes to external configuration file
+- Add more flow types as SDK evolves
+- Implement product type logic if needed
+- Add validation for deeplink parameters
+- Add deeplink testing/preview functionality
+
+## File Dependencies
+- `partner-definitions.yaml` - Source of truth for partner codes
+- `deeplink-guide.pdf` - Documentation for deeplink structure and flow types
+
+## Running the App
+```bash
+npm start
+```
+Runs on `http://localhost:3000`
+
+## Architecture Decisions
+1. **Hardcoded Data**: Partner codes and flow types are hardcoded for simplicity and reliability
+2. **Component Separation**: Each parameter has its own component for maintainability
+3. **Type Safety**: TypeScript interfaces ensure proper data flow
+4. **URL Encoding**: Proper encoding handles special characters in routes
+5. **Responsive Design**: Works well on different screen sizes
+
+---
+
+## Create React App Scripts
 
 ### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Runs the app in development mode at [http://localhost:3000](http://localhost:3000)
 
 ### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in interactive watch mode
 
 ### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Builds the app for production to the `build` folder

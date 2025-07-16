@@ -1,0 +1,118 @@
+# This is the global definition of Partners that applies system-wide across all environments.
+# It's crucial to maintain consistency in this definition across various environments.
+# This configuration serves as the authoritative source for partner definitions. Any Partner Code (PC) not defined here
+# should be considered invalid for any operation.
+# Furthermore, entries should never be deleted from this file. Once a Partner Code is assigned to an organization, it must
+# not be reused or reassigned to a different partner.
+- partnerCode: EDHS
+  name: Edhas
+- partnerCode: ACME
+  name: Acme Corp
+- partnerCode: ACMT
+  name: Acme Corp 2
+- partnerCode: ACM3
+  name: Acme Corp 3
+- partnerCode: ACM4
+  name: Acme Corp 4
+- partnerCode: TCMF
+  name: Tata Moneyfy
+- partnerCode: TNEU
+  name: Tata Neu
+- partnerCode: STBM
+  name: Stable Money
+- partnerCode: ONSR
+  name: Onsurity
+- partnerCode: MNCT
+  name: Moneycontrol
+- partnerCode: VNTR
+  name: Ventura Wealth
+- partnerCode: UDCH
+  name: UdChalo
+- partnerCode: ADBC
+  name: Aditya Birla Capital
+- partnerCode: SHIV
+  name: Shivalik SFB (partner)
+- partnerCode: SIBB
+  name: SIB Bank (partner)
+- partnerCode: CRED
+  name: Cred
+- partnerCode: AXCF
+  name: AXIO (Capital Float)
+- partnerCode: MOTL
+  name: Motilal Oswal
+- partnerCode: INDG
+  name: India Gold
+- partnerCode: INCR
+  name: InCred Money
+- partnerCode: SMLC
+  name: Smallcase
+- partnerCode: SLRS
+  name: SalarySe
+- partnerCode: ANGL
+  name: Angel One
+- partnerCode: SPMY
+  name: Super Money
+- partnerCode: ARTL
+  name: Airtel Thanks
+- partnerCode: FREO
+  name: Freo Money
+- partnerCode: MNVW
+  name: Moneyview
+- partnerCode: ZGGL
+  name: Zaggle
+- partnerCode: FTFN
+  name: 50Fin
+- partnerCode: PHPE
+  name: PhonePe
+- partnerCode: FIBE
+  name: Fibe (EarlySalary)
+- partnerCode: AMZN
+  name: Amazon
+- partnerCode: SNMT
+  name: Snapmint
+- partnerCode: OLKA
+  name: Oolka
+- partnerCode: BHRF
+  name: BharatFD
+- partnerCode: BHPE
+  name: BharatPe
+- partnerCode: VSTD
+  name: Vested Finance
+- partnerCode: SMMP
+  name: Summup
+- partnerCode: PWRP
+  name: PowerUp
+- partnerCode: WNTW
+  name: Wint Wealth
+- partnerCode: WZMO
+  name: Wizmo (FPL.Tech OneCard)
+- partnerCode: SPCM
+  name: Spice Money
+- partnerCode: VDFN
+  name: Vodafone
+- partnerCode: PSBZ
+  name: Paisabazaar
+- partnerCode: AGRF
+  name: altGraaf
+- partnerCode: JIRF
+  name: Jiraaf
+- partnerCode: ETMY
+  name: ET Money
+- partnerCode: D11M
+  name: Dream 11
+- partnerCode: PYTM
+  name: Paytm Money
+- partnerCode: ZRDH
+  name: Zerodha
+- partnerCode: INDM
+  name: INDmoney
+- partnerCode: PRMD
+  name: Pirimid Tech
+- partnerCode: 1PRC
+  name: One Percent Club
+- partnerCode: TRCR
+  name: True Credits
+- partnerCode: CSHE
+  name: CASHe (FD)
+- partnerCode: CSH2
+  name: CASHe (PL)
