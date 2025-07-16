@@ -17,9 +17,10 @@ export const generateDeeplink = (config: DeeplinkConfig): string => {
   // Get Firebase host for the partner
   const firebaseHost = getPartnerFirebaseHost(partner.code);
   
-  // If Firebase host is configured, prepend it to the deeplink
+  // If Firebase host is configured, use Firebase Dynamic Link format
   if (firebaseHost) {
-    return `https://${firebaseHost}/${encodeURIComponent(baseDeeplink)}`;
+    // Firebase Dynamic Links use ?link= parameter for the target URL
+    return `https://${firebaseHost}?link=${encodeURIComponent(baseDeeplink)}`;
   }
   
   // Otherwise, return the standard deeplink

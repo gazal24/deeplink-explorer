@@ -58,7 +58,7 @@ https://upswing.access.partner/${partnerCode}?action=webview&redirect=${route}
 
 ### Firebase Host Deeplink (for configured partners)
 ```
-https://${firebaseHost}/${encodeURIComponent(baseDeeplink)}
+https://${firebaseHost}?link=${encodeURIComponent(baseDeeplink)}
 ```
 
 Where:
@@ -78,8 +78,8 @@ Partners with Firebase hosts configured:
 - Multiple Banks: `https://upswing.access.partner/PHPE?action=webview&redirect=deeplink-manager%2Ffd%2FFSI_FILTER%3FfsiList%3DUTKSIN%7CSMCBIN`
 
 #### Firebase Host Deeplinks
-- Stable Money Help Center: `https://stablemoney.page.link/https%3A%2F%2Fupswing.access.partner%2FSTBM%3Faction%3Dwebview%26redirect%3Ddeeplink-manager%252Ffd%252FOPEN_HELP_CENTER`
-- Edhas My Investments: `https://edhas.page.link/https%3A%2F%2Fupswing.access.partner%2FEDHS%3Faction%3Dwebview%26redirect%3Ddeeplink-manager%252Ffd%252FVIEW_INVESTMENTS`
+- Stable Money Help Center: `https://stablemoney.page.link?link=https%3A%2F%2Fupswing.access.partner%2FSTBM%3Faction%3Dwebview%26redirect%3Ddeeplink-manager%252Ffd%252FOPEN_HELP_CENTER`
+- Edhas My Investments: `https://edhas.page.link?link=https%3A%2F%2Fupswing.access.partner%2FEDHS%3Faction%3Dwebview%26redirect%3Ddeeplink-manager%252Ffd%252FVIEW_INVESTMENTS`
 
 ## Key Features
 
