@@ -52,6 +52,7 @@
   name: Angel One
 - partnerCode: SPMY
   name: Super Money
+  baseUrl: https://super.money
 - partnerCode: ARTL
   name: Airtel Thanks
 - partnerCode: FREO

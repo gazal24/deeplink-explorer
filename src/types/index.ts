@@ -1,6 +1,7 @@
 export interface PartnerCode {
   name: string;
   code: string;
+  baseUrl?: string;
   firebaseHost?: string;
 }
 

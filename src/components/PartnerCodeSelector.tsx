@@ -35,7 +35,7 @@ const PartnerCodeSelector: React.FC<PartnerCodeSelectorProps> = ({
     { name: 'Smallcase', code: 'SMLC' },
     { name: 'SalarySe', code: 'SLRS' },
     { name: 'Angel One', code: 'ANGL' },
-    { name: 'Super Money', code: 'SPMY' },
+    { name: 'Super Money', code: 'SPMY', baseUrl: 'https://super.money' },
     { name: 'Airtel Thanks', code: 'ARTL' },
     { name: 'Freo Money', code: 'FREO' },
     { name: 'Moneyview', code: 'MNVW' },
