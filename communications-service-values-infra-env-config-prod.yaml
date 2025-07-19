@@ -1,0 +1,2114 @@
+chart-backend:
+  javaSystemProperty: "-Dreactor.netty.ioWorkerCount=16 -Dreactor.netty.pool.maxIdleTime=15000 -Dsun.net.inetaddr.ttl=5"
+  autoscaling:
+    maxReplicas: 5
+    minReplicas: 2
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1536Mi
+    requests:
+      cpu: 200m
+      memory: 1024Mi
+  logback:
+    enabled: true
+  database:
+    postgres:
+      enable: true
+      accessType: dedicated
+  injectExtraConfigs:
+    server:
+      event-streams:
+        migrateAt: 2025-06-26T21:15:00+05:30
+        listener-threads: 20
+      one.upswing.database.pool-db-config:
+        writer:
+          hikari-params:
+            maximumPoolSize: 32
+            minimumIdlePoolSize: 16
+          db-dispatcher-thread-pool-size: 32
+        reader:
+          hikari-params:
+            maximumPoolSize: 16
+            minimumIdlePoolSize: 8
+          db-dispatcher-thread-pool-size: 16
+      logging:
+        level:
+          event-streams: DEBUG
+          com.zaxxer.hikari: WARN
+          org.jooq.impl.FieldsImpl: WARN
+          org.apache.pulsar.client.impl.ConsumerStatsRecorderImpl: WARN
+          one:
+            upswing:
+              database.db_interface.DBConnectionProfiler: DEBUG
+    communications-config:
+      partner-notification-client:
+        res-timeout-ms: "2000"
+      knowlarity:
+        api-key: ${KNOWLARITY_API_KEY}
+        auth-token: ${KNOWLARITY_AUTH_TOKEN}
+      gupshup:
+        passwords:
+          acme-sms-password: ${GUPSHUP_SMS_PASSWORD}
+          acme-email-password: ${GUPSHUP_EMAIL_PASSWORD}
+      partner-secrets:
+        auth:
+          TCMF: ${COMMUNICATIONS_TATA_CLIENT_SECRET}
+          ARTL: ${COMMUNICATIONS_ARTL_CLIENT_SECRET}
+          MNCT: ${MNCT_PUSH_PASSWORD}
+          STBM: ${STBM_PUSH_PASSWORD}
+          SMLC: ${SMLC_ANALYTICS_PASSWORD} #Auth secret same as analytics
+          FREO: ${FREO_ANALYTICS_PASSWORD} #Auth secret same as analytics
+          SNMT: ${SNMT_ANALYTICS_PASSWORD} #Auth secret same as analytics
+      partner-analytics-api-key:
+        auth:
+          STBM:
+            api-key-name: "X-API-KEY"
+            api-key-value: ${STBM_API_KEY}
+          AXCF:
+            api-key-name: "x-axio-auth"
+            api-key-value: ${AXCF_API_KEY}
+          ADBC:
+            api-key-name: "API-KEY"
+            api-key-value: ${ADBC_API_KEY}
+          MOTL:
+            api-key-name: "XApiKey"
+            api-key-value: ${MOTL_API_KEY}
+          SPMY:
+            api-key-name: "X-API-KEY"
+            api-key-value: ${SPMY_API_KEY}
+          MNVW:
+            api-key-name: "X-API-KEY"
+            api-key-value: ${MNVW_API_KEY}
+          ZGGL:
+            api-key-name: "api-x-key"
+            api-key-value: ${ZGGL_API_KEY}
+          VNTR:
+            api-key-name: "x-api-key"
+            api-key-value: ${VNTR_API_KEY}
+          BHRF:
+            api-key-name: "X-API-KEY"
+            api-key-value: ${BHRF_API_KEY}
+          WNTW:
+            api-key-name: "X-API-KEY"
+            api-key-value: ${WNTW_API_KEY}
+          WZMO:
+            api-key-name: "x-api-key"
+            api-key-value: ${WZMO_API_KEY}
+          SMMP:
+            api-key-name: "X-API-KEY"
+            api-key-value: ${SMMP_API_KEY}
+          AGRF:
+            api-key-name: "x-api-key"
+            api-key-value: ${AGRF_API_KEY}
+          JIRF:
+            api-key-name: "x-api-key"
+            api-key-value: ${JIRF_API_KEY}
+          CSHE:
+            api-key-name: "X-API-KEY"
+            api-key-value: ${CSHE_API_KEY}
+
+      partner-api-key:
+        auth:
+          STBM:
+            api-key-name: "X-API-KEY"
+            api-key-value: ${STBM_API_KEY}
+          AXCF:
+            api-key-name: "x-axio-auth"
+            api-key-value: ${AXCF_API_KEY}
+          ADBC:
+            api-key-name: "API-KEY"
+            api-key-value: ${ADBC_API_KEY}
+          MOTL:
+            api-key-name: "XApiKey"
+            api-key-value: ${MOTL_API_KEY}
+          SPMY:
+            api-key-name: "X-API-KEY"
+            api-key-value: ${SPMY_API_KEY}
+          MNVW:
+            api-key-name: "X-API-KEY"
+            api-key-value: ${MNVW_API_KEY}
+          ZGGL:
+            api-key-name: "api-x-key"
+            api-key-value: ${ZGGL_API_KEY}
+          VNTR:
+            api-key-name: "X-api-key"
+            api-key-value: ${VNTR_COMMS_API_KEY}
+          BHRF:
+            api-key-name: "X-API-KEY"
+            api-key-value: ${BHRF_API_KEY}
+          SMMP:
+            api-key-name: "X-API-KEY"
+            api-key-value: ${SMMP_API_KEY}
+          WZMO:
+            api-key-name: "x-api-key"
+            api-key-value: ${WZMO_API_KEY}
+          WNTW:
+            api-key-name: "X-API-KEY"
+            api-key-value: ${WNTW_API_KEY}
+          CSHE:
+            api-key-name: "X-API-KEY"
+            api-key-value: ${CSHE_API_KEY}
+
+      partner-analytics-secrets:
+        auth:
+          MNCT: ${MNCT_PUSH_PASSWORD}
+          SMLC: ${SMLC_ANALYTICS_PASSWORD}
+          FREO: ${FREO_ANALYTICS_PASSWORD}
+          ARTL: ${COMMUNICATIONS_ARTL_CLIENT_SECRET}
+          SNMT: ${SNMT_ANALYTICS_PASSWORD} #Auth secret same as analytics
+      partner-analytics-api-token:
+        auth:
+          ANGL: ${ANGL_AUTH_TOKEN}
+          VDFN: ${VDFN_AUTH_TOKEN}
+      partner-api-key-for-additional-webhook:
+        auth: {}
+      url-shortener:
+          cuttly-key: ${COMMUNICATIONS_CUTTLY_KEY}
+      short-link-enabled-headers:
+        headers: [ "USWING", "UTKSPR", "ABCDFD", "ANGOne", "FREOYN", "TATACL", "axioin","POWRFD","ALTGRF","JIRAAF", "VIFIN", "DRMFIN", "ETMNY", "PAISFD", "KRTWLT" ]
+
+      partners-analytics:
+        partners:
+          STBM:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              analytics-url: https://webhook-api.stablemoney.in/upswing
+              analytics-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, PAYMENT_INITIATION_FAILURE]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED]
+          AXCF:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              analytics-url: https://callbacks.getwalnut.com/callback/axio_fd/event/
+              analytics-skipped-events:
+                FD-REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, PAYMENT_INITIATION_FAILURE, TD_LOCKED]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+          MNCT:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: BASIC
+                username: mc-upswing-01
+                url: null
+              analytics-url: https://api.moneycontrol.com/finserv/notification/pushUserEvent
+              analytics-skipped-events:
+                FD-REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+          INCR:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              analytics-url: https://api.incredmoney.com/partner/fixedDeposits/fd/webhook
+              analytics-skipped-events:
+                FD-REGULAR: [PAYMENT_INITIATION_FAILURE, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+          ADBC:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              analytics-url: https://asia-south1-abcd-dataplatform-prod.cloudfunctions.net/abcd_upswing_realtime
+              analytics-skipped-events:
+                FD-REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+          ANGL:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: BEARER
+                username: "" #dummy username
+                url: "" #ANGL directly provide us with the token , so no need to call external API to fetch token
+              analytics-url: https://fdcore-prod.angelone.in/webhook/upswing/external/capture/event
+              analytics-skipped-events:
+                FD-REGULAR: [PAYMENT_INITIATION_FAILURE, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+          VDFN:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: BEARER
+                username: "" #dummy username
+                url: "" #VDFN directly provide us with the token , so no need to call external API to fetch token
+              analytics-url: https://vishop.myvi.in/o/vil-headless-create-order/v1.0/clickOutWebhook/upswing
+              analytics-skipped-events:
+                FD-REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, TD_LOCKED]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+
+          MOTL:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: API_KEY
+                username: ""
+                url: ""
+              analytics-url: https://api.riseapp.in/services/FixedDeposit/InsertFDEvents
+              analytics-skipped-events:
+                FD-REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+          TCMF:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: BEARER
+                username: UPSWINGPRODUSER
+                url: https://moneyfytcl.tatacapital.com/APIGateway/um/service/tp-login
+              analytics-url: https://moneyfytcl.tatacapital.com/APIGateway/dlppl/upswing/external/capture/event
+              analytics-skipped-events:
+                FD-REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, TD_LOCKED]
+                UL-PERSONAL: [AADHAAR_SUCCESS, AADHAAR_FAILED, TD_BOOKED, JOURNEY_CREATED, PAN_FAILURE, DIGILOCKER_FAILED, WITHDRAWL_BANK_SUCCESS, WITHDRAWL_BANK_FAILURE, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+          SLRS:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              analytics-url: https://api.salaryse.com/gw/v1/webhooks/upswing/fd/events/analytics
+              analytics-skipped-events:
+                FD-REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+          SMLC:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: BASIC
+                username: sc-upswing-prod
+                url: null
+              analytics-url: https://deposits.smallcase.com/deposit/webhook/upswing/analytics
+              analytics-skipped-events:
+                FD-REGULAR: [ PAYMENT_INITIATION_FAILURE, TD_LOCKED]
+                FD-SIP: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE ]
+                FD-FRD_REGULAR: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED ]
+                UL-PERSONAL: [ AADHAAR_SUCCESS, AADHAAR_FAILED, DEMOG_SUCCESS, TD_BOOKED, JOURNEY_CREATED, PAN_SUCCESS, PAN_FAILURE, DIGILOCKER_FAILED, WITHDRAWL_BANK_SUCCESS, WITHDRAWL_BANK_FAILURE, TD_LOCKED ]
+
+          FREO:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: BASIC
+                username: freo-upswing-user
+                url: null
+              analytics-url: https://api-grow.freo.app/external/capture/event
+              analytics-skipped-events:
+                FD-REGULAR: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, TD_LOCKED ]
+                FD-SIP: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE ]
+                FD-FRD_REGULAR: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED ]
+                UL-PERSONAL: [ AADHAAR_SUCCESS, AADHAAR_FAILED, DEMOG_SUCCESS, TD_BOOKED, JOURNEY_CREATED, PAN_SUCCESS, PAN_FAILURE, DIGILOCKER_FAILED, WITHDRAWL_BANK_SUCCESS, WITHDRAWL_BANK_FAILURE, TD_LOCKED ]
+
+          MNVW:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              analytics-url: https://fdm-callback.whizdm.com/qarth/external/capture/event
+              analytics-skipped-events:
+                FD-REGULAR: [PAYMENT_INITIATION_FAILURE, TD_LOCKED]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE]
+          SPMY:
+            analytics-config:
+              enabled: true
+              supported-product-variant: SCC-FD_LIENED
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              analytics-url: https://sm-pandora.super.money/pandora/v1/upswing/events/analytics
+              analytics-skipped-events:
+                FD-REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+                SCC-FD_LIENED: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, JOURNEY_CANCELLED, CREDIT_LIMIT_DECREASE, CREDIT_LIMIT_DECREASE_FAILURE, TD_WITHDRAWAL_RETRY, TD_LOCKED]
+          D11M:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              analytics-url: https://dmoney.platform.dream.money/external/capture/event
+              analytics-skipped-events:
+                FD-REGULAR: [PAYMENT_INITIATION_FAILURE, PLAN_DETAILS_CHANGED, TD_LOCKED]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED, PAYMENT_INITIATION_FAILURE]
+          VNTR:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              analytics-url: https://invest.venturasecurities.com/fd/external/capture/event
+              analytics-skipped-events:
+                FD-REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+          ARTL:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: BEARER
+                username: upswing
+                url: https://fs-external-kong.airtel.in/fs-platform/fd/fs/auth/sign_in
+              analytics-url: https://fs-external-kong.airtel.in/fs-platform/fd/fixed-deposit/update/application/status
+              custom-headers:
+                partner: Upswing
+                correlation-id: Upswing
+              analytics-skipped-events:
+                FD-REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+          EDHS:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              analytics-url: http://edhas-backend-service.in1.upswing/internal/v1/analyticsWebhook
+              analytics-skipped-events:
+                FD-REGULAR: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, TD_LOCKED ]
+                FD-SIP: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE ]
+                FD-FRD_REGULAR: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED ]
+                UL-PERSONAL: [ AADHAAR_SUCCESS, AADHAAR_FAILED, DEMOG_SUCCESS, TD_BOOKED, JOURNEY_CREATED, PAN_SUCCESS, PAN_FAILURE, DIGILOCKER_FAILED, WITHDRAWL_BANK_SUCCESS, WITHDRAWL_BANK_FAILURE, TD_LOCKED ]
+
+          FIBE:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              analytics-url: https://swapi.fibe.in/hubappservice/upSwingAnalyticsWebhook
+              analytics-skipped-events:
+                FD-REGULAR: [PAYMENT_INITIATION_FAILURE, PLAN_DETAILS_CHANGED, TD_LOCKED]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE]
+          ZGGL:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              analytics-url: https://webhooks.zaggle.info/save/v1/upswing/events
+              analytics-skipped-events:
+                FD-REGULAR: [PAYMENT_INITIATION_FAILURE, PLAN_DETAILS_CHANGED, TD_LOCKED]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE]
+          WNTW:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              analytics-url: https://api.wintwealth.com/fd/upswing/webhook/external/capture/event
+              analytics-skipped-events:
+                FD-REGULAR: [PAYMENT_INITIATION_FAILURE, PLAN_DETAILS_CHANGED, TD_LOCKED]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE]
+          FTFN:
+            analytics-config:
+              enabled: true
+              supported-product-variant: UL-PERSONAL
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              analytics-url: https://api-prod.50fin.in/upswing_webhook
+              analytics-skipped-events:
+                FD-REGULAR: [ PAYMENT_INITIATION_FAILURE, PLAN_DETAILS_CHANGED, TD_LOCKED ]
+                FD-FRD_REGULAR: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED ]
+                FD-SIP: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED ]
+                UL-PERSONAL: [ AADHAAR_SUCCESS, AADHAAR_FAILED, TD_BOOKED, JOURNEY_CREATED, PAN_FAILURE, DIGILOCKER_FAILED, WITHDRAWL_BANK_SUCCESS, WITHDRAWL_BANK_FAILURE, TD_LOCKED ]
+
+          BHRF:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              analytics-url: https://prod.v1-api.bharatfd.com/webhooks/analytics
+              analytics-skipped-events:
+                FD-REGULAR: [PAYMENT_INITIATION_FAILURE, PLAN_DETAILS_CHANGED, TD_LOCKED]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE]
+          OLKA:
+            analytics-config:
+              enabled: true
+              supported-product-variant: UL-PERSONAL
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              analytics-url: https://api-v2.oolka.in/v2/webhooks/upswing-analytics-event
+              analytics-skipped-events:
+                FD-REGULAR: [ PAYMENT_INITIATION_FAILURE, PLAN_DETAILS_CHANGED, TD_LOCKED ]
+                FD-SIP: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE ]
+                FD-FRD_REGULAR: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED ]
+                UL-PERSONAL: [ AADHAAR_SUCCESS, AADHAAR_FAILED, TD_BOOKED, JOURNEY_CREATED, PAN_FAILURE, DIGILOCKER_FAILED, WITHDRAWL_BANK_SUCCESS, WITHDRAWL_BANK_FAILURE, TD_LOCKED ]
+          SNMT:
+            analytics-config:
+              enabled: true
+              supported-product-variant: UL-PERSONAL
+              authentication:
+                type: BASIC
+                username: snapmint
+                url: null
+              analytics-url: https://super-apis.snapmint.com/v1/external/upswing_analytics
+              analytics-skipped-events:
+                FD-REGULAR: [ PAYMENT_INITIATION_FAILURE, PLAN_DETAILS_CHANGED, TD_LOCKED ]
+                FD-SIP: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE ]
+                FD-FRD_REGULAR: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED ]
+                UL-PERSONAL: [ AADHAAR_SUCCESS, AADHAAR_FAILED, TD_BOOKED, JOURNEY_CREATED, PAN_FAILURE, DIGILOCKER_FAILED, WITHDRAWL_BANK_SUCCESS, WITHDRAWL_BANK_FAILURE, TD_LOCKED ]
+
+          PWRP:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              analytics-url: https://pu-callback.powerup.money/v1/upswing/callback
+              analytics-skipped-events:
+                FD-REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, TD_LOCKED]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE]
+          AGRF:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              analytics-url: https://www.altgraaf.com/api/upswing/event-updates
+              analytics-skipped-events:
+                FD-REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, TD_LOCKED]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE]
+          AMZN:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: NONE
+              analytics-skipped-events:
+                FD-REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, TD_LOCKED]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE]
+              sns-details:
+                topic-arn: "arn:aws:sns:ap-south-1:075666330803:WealthUpswingAnalyticalEventsSNSTopic.fifo"
+                role-arn: "arn:aws:iam::075666330803:role/WealthUpswingAnalyticalEventsSNSPublishRole"
+                region: "ap-south-1"
+          VSTD:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              analytics-url: https://vested-sidekick-prod.vestedfinance.com/sidekick/corporate-fd/webhooks/analytics
+              analytics-skipped-events:
+                FD-REGULAR: [PAYMENT_INITIATION_FAILURE, PLAN_DETAILS_CHANGED, TD_LOCKED]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+          JIRF:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              analytics-url: https://www.jiraaf.com/api/upswing/event-updates
+              analytics-skipped-events:
+                FD-REGULAR:
+                  - TD_LOCKED
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+          WZMO:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              analytics-url: https://api.getonecard.app/WIZMO/5270296789/FD/external/capture/event
+              analytics-skipped-events:
+                FD-REGULAR: [PAYMENT_INITIATION_FAILURE, PLAN_DETAILS_CHANGED, TD_LOCKED]
+                FD-FRD_REGULAR: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+                FD-SIP: [PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED]
+          ETMY:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              analytics-url: https://apis.smartspends.com/fdwebhook/upswing/analytics/add
+              analytics-skipped-events:
+                FD-REGULAR: [ PAYMENT_INITIATION_FAILURE, PLAN_DETAILS_CHANGED, TD_LOCKED ]
+                FD-FRD_REGULAR: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED ]
+                FD-SIP: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED ]
+
+          PSBZ:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              analytics-url: https://api2.paisabazaar.com/investment/v1/partner/3cf84c61-efce-45a0-8149-de18673a486b/webhook/external/capture/event
+              custom-headers:
+                x-site-id: 49fbe1dc-d501-4c8b-bc21-e1f4d9626105
+              analytics-skipped-events:
+                FD-REGULAR: [ PAYMENT_INITIATION_FAILURE, PLAN_DETAILS_CHANGED, TD_LOCKED ]
+                FD-FRD_REGULAR: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED ]
+                FD-SIP: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED ]
+
+          CSHE:
+            analytics-config:
+              enabled: true
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              analytics-url: https://856iavjnn3.execute-api.ap-south-1.amazonaws.com/production/capture/event
+              analytics-skipped-events:
+                FD-REGULAR: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, TD_LOCKED ]
+                FD-FRD_REGULAR: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED ]
+                FD-SIP: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED ]
+
+          SHIV:
+            analytics-config:
+              enabled: false
+              supported-product-variant: FD-REGULAR
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              analytics-url: ""
+              analytics-skipped-events:
+                FD-REGULAR: [ PAYMENT_INITIATION_FAILURE, PLAN_DETAILS_CHANGED, TD_LOCKED ]
+                FD-FRD_REGULAR: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED ]
+                FD-SIP: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED ]
+
+          SMMP:
+            analytics-config:
+              enabled: true
+              supported-product-variant: UL-PERSONAL
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              analytics-url: https://api-app.summup.in/v1/webhook/upswing/event/capture
+              analytics-skipped-events:
+                FD-REGULAR: [ PAYMENT_INITIATION_FAILURE, PLAN_DETAILS_CHANGED, TD_LOCKED ]
+                FD-FRD_REGULAR: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_FAILURE, PAYMENT_INITIATION_SUCCESS, MATURITY_INSTRUCTION_UPDATE_SUCCESS, TD_MATURED, TD_RENEWED, TD_LOCKED ]
+                FD-SIP: [ PLAN_DETAILS_CHANGED, PAYMENT_INITIATION_SUCCESS, TD_LOCKED, PAYMENT_INITIATION_FAILURE ]
+                UL-PERSONAL: [ AADHAAR_SUCCESS, AADHAAR_FAILED, DEMOG_SUCCESS, TD_BOOKED, JOURNEY_CREATED, PAN_FAILURE, DIGILOCKER_FAILED, WITHDRAWL_BANK_SUCCESS, WITHDRAWL_BANK_FAILURE, TD_LOCKED ]
+
+      partners-communications:
+        partners:
+          STBM:
+            sms-config:
+              disabled: false
+              principal-id: "1001890750519171497"
+              sender-id: STBMNY
+              sms-skipped-events:
+                FD-REGULAR: [ VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_RESUME, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE ]
+                FD-FRD_REGULAR: [ VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_RESUME, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE ]
+                FD-SIP: [ VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_RESUME, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, VKYC_REMINDER, VKYC_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE, TD_BOOKED_COMPLETE, PAYMENT_SUCCESS ]
+                FD-TAXSAVER: [ TD_MATURITY_INSTRUCTION_UPDATE_DUE ]
+            push-config:
+              disabled: false
+              authentication:
+                type: BASIC
+                username: upswing_notification_service_user_prod
+                url: null
+              notification-url: https://notification-api.stablemoney.in/v1/callback/upswing/push-notification
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-FRD_REGULAR: [ ]
+                FD-SIP: [ VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_RESUME, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, VKYC_REMINDER, VKYC_RETRY, TD_BOOKED_COMPLETE, PAYMENT_SUCCESS, TD_MATURITY_INSTRUCTION_UPDATE_DUE ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: in.stablemoney.app
+            firebase-dynamic-link-supported: true
+            firebase-hostname: stablemoney.page.link
+            deep-link-base: https://upswing.access.partner
+
+          EDHS:
+            sms-config:
+              disabled: false
+              principal-id: "1201165797634270488"
+              sender-id: USWING
+              sms-skipped-events:
+                FD-REGULAR: [ TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE ]
+                SCC-FD_LIENED: [ TXN_SUSPECTED_FRAUD ]
+                UL-PERSONAL: [ PL_JOURNEY_CANCELLED, PL_JOURNEY_CREATED, UL_RESUME_POST_BANK_OFFER, UL_RESUME_FOR_FSI, LOAN_DISBURSED, ENACH_INITIATED, ENACH_SUCCESS, VKYC_SUCCESS, VKYC_SUCCESS, BANK_OFFER_AVAILABLE ]
+                FD-SIP: [ VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, VKYC_SUCCESS ]
+            push-config:
+              disabled: false
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              notification-url: http://edhas-backend-service.in1.upswing/internal/v1/sendNotification
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                SCC-FD_LIENED: [ CARD_DELIVERY_CARD_LOST, ENABLED_CARD_CONTROLS, DISABLED_CARD_CONTROLS, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TXN_APPROVED, TXN_SUSPECTED_FRAUD, UPI_TXN_APPROVAL, UPI_TXN_REFUND, TXN_DECLINED_INCREASE_LIMIT, TXN_DECLINED_REPAY, TXN_DECLINED_INCORRECT_PIN, TXN_DECLINED_CARD_CONTROLS, TXN_DECLINED_USER_LIMIT_BREACH, TXN_DECLINED_ACS_GENERIC, TXN_DECLINED_CARD_FROZEN, TXN_DECLINED_INVALID_CVV, TXN_DECLINED_INVALID_EXPIRY, TXN_DECLINED_SECURITY_REASONS, TXN_DECLINED_DORMANT_CARD, TXN_DECLINED, TXN_DECLINED_INSUFFICIENT_CASH_LIMIT, TXN_DECLINED_WRONG_ACS_OTP, CONSECUTIVE_3_PIN_FAILURE, SCC_CREATION_FAILURE, DISPUTE_RECEIVED, DISPUTE_CREDIT_POSTED, DISPUTE_CREDIT_REVERSED, DISPUTE_RESOLVED_CUSTOMER, DISPUTE_RESOLVED_MERCHANT, LATE_PAYMENT_FEE_CHARGED, PHYSICAL_CARD_FEE_CHARGED, FEE_REVERSAL, MERCHANT_REFUND, REPAYMENT_SUCCESS, REPAYMENT_FAILED, PENDING_TAD_KNOCKED_OFF, ACC_BLOCK, EXCESS_BALANCE_REVERSAL, CARD_ON, CARD_OFF, CARD_BLOCKED, CARD_DELIVERY_REDISPATCH, PIN_SET_SUCCESSFUL, PIN_SET_FAILED, CARD_STATUS_REPLACED, REACTIVATE_CARD, ENABLED_CARD_CONTROLS, DISABLED_CARD_CONTROLS, SCC_IL_JOURNEY_CREATION, SCC_JOURNEY_CREATION, TD_BOOKED_COMPLETE, VKYC_SUCCESS ] # CSS events needs to be fixed
+                UL-PERSONAL: [ PL_JOURNEY_CANCELLED, PL_JOURNEY_CREATED, ENACH_INITIATED, POTENTIAL_BANKING_OFFER ]
+                FD-SIP: [ TD_MATURITY_INSTRUCTION_UPDATE_DUE, VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY , PAYMENT_SUCCESS]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                SCC-FD_LIENED:
+                  - event-type: TXN_SUSPECTED_FRAUD
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 1000.00
+                      SURYIN:
+                        min-amount: 1000.00
+                      SMCBIN:
+                        min-amount: 1000.00
+                      NESFIN:
+                        min-amount: 1000.00 #reducing the min amount to 1000 for testing purpose
+            android-app-id: one.upswing.edhas
+            firebase-dynamic-link-supported: true
+            firebase-hostname: edhas.page.link
+            deep-link-base: https://upswing.access.partner
+
+          ACME:
+            sms-config:
+              disabled: false
+              principal-id: "1201165797634270488"
+              sender-id: USWING
+              sms-skipped-events:
+                FD-REGULAR: [ TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE ]
+                UL-PERSONAL: [ PL_JOURNEY_CANCELLED, PL_JOURNEY_CREATED, LOAN_DISBURSED ]
+            push-config:
+              disabled: false
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              notification-url: http://edhas-backend-service.in1.upswing/internal/v1/sendNotification
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                UL-PERSONAL: [ PL_JOURNEY_CANCELLED, PL_JOURNEY_CREATED, POTENTIAL_BANKING_OFFER ]
+                FD-SIP: [ TD_MATURITY_INSTRUCTION_UPDATE_DUE, VKYC_SUCCESS, PAYMENT_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: one.upswing.samplepartnerapp
+            firebase-dynamic-link-supported: true
+            firebase-hostname: samplepartnerapp.page.link
+            deep-link-base: https://upswing.access.partner
+
+          ACMT:
+            sms-config:
+              disabled: false
+              principal-id: "1201165797634270488"
+              sender-id: USWING
+              sms-skipped-events:
+                FD-REGULAR: [ TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE ]
+                UL-PERSONAL: [ PL_JOURNEY_CANCELLED, PL_JOURNEY_CREATED, LOAN_DISBURSED ]
+            push-config:
+              disabled: false
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              notification-url: http://edhas-backend-service.in1.upswing/internal/v1/sendNotification
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                UL-PERSONAL: [ PL_JOURNEY_CANCELLED, PL_JOURNEY_CREATED ]
+                FD-SIP: [ TD_MATURITY_INSTRUCTION_UPDATE_DUE, VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, PAYMENT_SUCCESS ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: one.upswing.samplepartnerapp
+            firebase-dynamic-link-supported: true
+            firebase-hostname: samplepartnerapp.page.link
+            deep-link-base: https://upswing.access.partner
+
+          TCMF:
+            sms-config:
+              disabled: false
+              principal-id: "1101637310000019220"
+              sender-id: TATACL
+              sms-skipped-events:
+                FD-REGULAR: [ TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE ]
+                UL-PERSONAL: [ UL_RESUME_FOR_FSI, UL_RESUME_POST_BANK_OFFER, LOAN_DISBURSED, LOAN_REJECTED, BANK_OFFER_AVAILABLE, PL_JOURNEY_CANCELLED, PL_JOURNEY_CREATED, LOAN_DISBURSED, ENACH_INITIATED, ENACH_SUCCESS, TD_RESUME, TD_EXPIRY, TD_BOOKED_COMPLETE, VKYC_SUCCESS ]
+                FD-SIP: [ VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_RESUME, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, VKYC_REMINDER, VKYC_RETRY, TD_BOOKED_COMPLETE ]
+            push-config:
+              disabled: false
+              authentication:
+                type: BEARER
+                username: UPSWINGPRODUSER
+                url: https://moneyfytcl.tatacapital.com/APIGateway/um/service/tp-login
+              notification-url: https://moneyfytcl.tatacapital.com/APIGateway/dlppl/upswing/communication
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ TD_MATURITY_INSTRUCTION_UPDATE_DUE, VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, PAYMENT_SUCCESS ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: com.tatacapital.moneyfy
+            firebase-dynamic-link-supported: true
+            firebase-hostname: tatacapitalmoneyfy.page.link
+            deep-link-base: https://upswing.access.partner
+
+          MNCT:
+            sms-config:
+              disabled: true
+              principal-id: "N/A"
+              sender-id: "N/A"
+              sms-skipped-events:
+                FD-REGULAR: [ TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE ]
+                FD-SIP: [ VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_RESUME, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, VKYC_REMINDER, VKYC_RETRY, TD_BOOKED_COMPLETE ]
+            push-config:
+              disabled: false
+              authentication:
+                type: BASIC
+                username: mc-upswing-01
+                url: null
+              notification-url: https://api.moneycontrol.com/finserv/notification/processEvent
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS, TD_MATURITY_INSTRUCTION_UPDATE_DUE, VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: com.divum.MoneyControl
+            firebase-dynamic-link-supported: true
+            firebase-hostname: moneycontrol.page.link
+            deep-link-base: https://www.moneycontrol.com
+
+          VNTR:
+            sms-config:
+              disabled: false
+              principal-id: "1101484030000012241"
+              sender-id: VNTURA
+              sms-skipped-events:
+                FD-REGULAR: [ TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE, TD_EXPIRY ]
+                FD-SIP: [ VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_RESUME, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, VKYC_REMINDER, VKYC_RETRY, TD_BOOKED_COMPLETE ]
+            push-config:
+              disabled: true
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              notification-url: https://invest.venturasecurities.com/fd/external/capture/communication/events
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS, TD_MATURITY_INSTRUCTION_UPDATE_DUE, VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: com.ventura.venturawealth
+            firebase-dynamic-link-supported: true
+            firebase-hostname: ""
+            deep-link-base: https://vw.ventura1.com/vwdeeplink/vw
+
+          UDCH:
+            sms-config:
+              disabled: false
+              principal-id: "1001474602933640825"
+              sender-id: UDCHLO
+              sms-skipped-events:
+                FD-REGULAR: [ TD_EXPIRY, VKYC_REMINDER, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE ]
+                FD-SIP: [ VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_RESUME, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, VKYC_REMINDER, VKYC_RETRY, TD_BOOKED_COMPLETE ]
+            push-config:
+              disabled: true
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              notification-url: ""
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS, TD_MATURITY_INSTRUCTION_UPDATE_DUE, VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: app.udChalo.flights
+            firebase-dynamic-link-supported: true
+            firebase-hostname: ""
+            deep-link-base: https://app.udchalo.com/app
+
+          AXCF:
+            sms-config:
+              disabled: false
+              principal-id: "1101438320000011643"
+              sender-id: axioin
+              sms-skipped-events:
+                FD-REGULAR: [ TD_EXPIRY, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_RESUME, VKYC_REMINDER, VKYC_RETRY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE ]
+                FD-SIP: [ VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_RESUME, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, VKYC_REMINDER, VKYC_RETRY, TD_BOOKED_COMPLETE ]
+            push-config:
+              disabled: false
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              notification-url: https://callbacks.getwalnut.com/callback/axio_fd/event/
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS, TD_MATURITY_INSTRUCTION_UPDATE_DUE, VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: com.daamitt.walnut.app
+            firebase-dynamic-link-supported: false
+            firebase-hostname: ""
+            deep-link-base: https://axio.co/deposits/
+
+          D11M:
+            sms-config:
+              disabled: false
+              principal-id: "1201173986072689684"
+              sender-id: "DRMFIN"
+              sms-skipped-events:
+                FD-REGULAR: [ TD_EXPIRY, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE, PAYMENT_REFUND, PRE_MATURED_WITHDRAWAL ]
+            push-config:
+              disabled: false
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              notification-url: https://dmoney.platform.dream.money/external/communicationEvent
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS, TD_MATURITY_INSTRUCTION_UPDATE_DUE, VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: in.dreamsuite.dreammoney.app
+            firebase-dynamic-link-supported: false
+            firebase-hostname: ""
+            deep-link-base: https://dream.money
+
+          INCR:
+            sms-config:
+              disabled: false
+              principal-id: "1101480810000066447"
+              sender-id: INCMNY
+              sms-skipped-events:
+                FD-REGULAR: [ TD_EXPIRY, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE ]
+                FD-SIP: [ VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_RESUME, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, VKYC_REMINDER, VKYC_RETRY, TD_BOOKED_COMPLETE ]
+            push-config:
+              disabled: false
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              notification-url: https://api.incredmoney.com/partner/fixedDeposits/fd/webhook/communication
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS, TD_MATURITY_INSTRUCTION_UPDATE_DUE, VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: com.incredmoney
+            firebase-dynamic-link-supported: false
+            firebase-hostname: ""
+            deep-link-base: https://fd.incredmoney.com/platform/
+
+          ADBC:
+            sms-config:
+              disabled: false
+              principal-id: "1701168172852248524"
+              sender-id: ABCDFD
+              sms-skipped-events:
+                FD-REGULAR: [ TD_EXPIRY, TD_BOOKED_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE ]
+                FD-SIP: [ VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_RESUME, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, VKYC_REMINDER, VKYC_RETRY, TD_BOOKED_COMPLETE ]
+            push-config:
+              disabled: false
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              notification-url: https://asia-south1-abcd-dataplatform-prod.cloudfunctions.net/abcd_upswing_communication
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS, TD_MATURITY_INSTRUCTION_UPDATE_DUE, VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: com.adityabirlacapital.abconeapp
+            firebase-dynamic-link-supported: false
+            firebase-hostname: ""
+            deep-link-base: https://adityabirlacapitaldigital.onelink.me/Ki2q/0iwyi6cy
+
+          ANGL:
+            sms-config:
+              disabled: false
+              principal-id: "110100001931"
+              sender-id: ANGOne
+              sms-skipped-events:
+                FD-REGULAR: [ TD_EXPIRY, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE ]
+                FD-SIP: [ VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_RESUME, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, VKYC_REMINDER, VKYC_RETRY, TD_BOOKED_COMPLETE ]
+            push-config:
+              disabled: true
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              notification-url: ""
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS, TD_MATURITY_INSTRUCTION_UPDATE_DUE, VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: com.msf.angelmobile
+            firebase-dynamic-link-supported: false
+            firebase-hostname: angeloneapp.page.link
+            deep-link-base: "" # currently ANGL only has one single static deeplink to be sent in all events
+            
+          AMZN:
+            sms-config:
+              disabled: true
+              principal-id: ""
+              sender-id: ""
+              sms-skipped-events: {}
+            push-config:
+              disabled: true
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              push-skipped-events: {}
+            ivr-config:
+              disabled: true
+              ivr-enabled-events: {}
+            android-app-id: ""
+            firebase-dynamic-link-supported: false
+            firebase-hostname: ""
+            
+          MOTL:
+            sms-config:
+              disabled: false
+              principal-id: "110100001216"
+              sender-id: MOSLIN
+              sms-skipped-events:
+                FD-REGULAR: [ TD_EXPIRY, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_MATURITY, TD_RESUME, VKYC_REMINDER, VKYC_RETRY, TD_RENEWAL_COMPLETE, VKYC_SUCCESS, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE ]
+                FD-SIP: [ VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_RESUME, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, VKYC_REMINDER, VKYC_RETRY, TD_BOOKED_COMPLETE ]
+                FD-TAXSAVER: [ TD_RESUME ]
+            push-config:
+              disabled: true
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              notification-url: ""
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS, TD_MATURITY_INSTRUCTION_UPDATE_DUE, VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: com.mosl.mobile
+            firebase-dynamic-link-supported: true
+            firebase-hostname: moriseapp.page.link
+            deep-link-base: https://upswing.access.partner
+
+          SLRS:
+            sms-config:
+              disabled: false
+              principal-id: "1701169276829703215"
+              sender-id: SLRYSE
+              sms-skipped-events:
+                FD-REGULAR: [ PAYMENT_FAILURE, PAYMENT_SUCCESS, TD_EXPIRY, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_BOOKED_COMPLETE, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE ]
+                FD-SIP: [ VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_RESUME, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, VKYC_REMINDER, VKYC_RETRY, TD_BOOKED_COMPLETE ]
+            push-config:
+              disabled: false
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              notification-url: https://api.salaryse.com/gw/v1/webhooks/upswing/fd/events/communications
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS, TD_MATURITY_INSTRUCTION_UPDATE_DUE, VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: com.salaryse.android
+            firebase-dynamic-link-supported: true
+            firebase-hostname: l.salaryse.com
+            deep-link-base: https://salaryse.com
+
+          SMLC:
+            sms-config:
+              disabled: true
+              principal-id: "NA"
+              sender-id: "NA"
+              sms-skipped-events:
+                FD-REGULAR: [ ]
+                UL-PERSONAL: [ UL_RESUME_FOR_FSI, UL_RESUME_POST_BANK_OFFER, LOAN_DISBURSED, LOAN_REJECTED, BANK_OFFER_AVAILABLE, PL_JOURNEY_CANCELLED, PL_JOURNEY_CREATED, LOAN_DISBURSED, ENACH_INITIATED, ENACH_SUCCESS, TD_RESUME, TD_EXPIRY, TD_BOOKED_COMPLETE, VKYC_SUCCESS ]
+            push-config:
+              disabled: false
+              authentication:
+                type: BASIC
+                username: sc-upswing-prod
+                url: null
+              notification-url: https://deposits.smallcase.com/deposit/webhook/upswing/comms
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS, TD_MATURITY_INSTRUCTION_UPDATE_DUE, VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY ]
+                UL-PERSONAL: [ PL_JOURNEY_CANCELLED, PL_JOURNEY_CREATED, ENACH_INITIATED ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: com.smallcase.android
+            firebase-dynamic-link-supported: false
+            firebase-hostname: ""
+            deep-link-base: smallcase://upswing
+
+          FREO:
+            sms-config:
+              disabled: false
+              principal-id: "1101391900000011583"
+              sender-id: FREOYN
+              sms-skipped-events:
+                FD-REGULAR: [ TICKET_ADDED, TICKET_CLOSED, TD_EXPIRY, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE ]
+                FD-SIP: [ VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_RESUME, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, VKYC_REMINDER, VKYC_RETRY, TD_BOOKED_COMPLETE ]
+                UL-PERSONAL: [ UL_RESUME_FOR_FSI, UL_RESUME_POST_BANK_OFFER, LOAN_DISBURSED, LOAN_REJECTED, BANK_OFFER_AVAILABLE, PL_JOURNEY_CANCELLED, PL_JOURNEY_CREATED, LOAN_DISBURSED, ENACH_INITIATED, ENACH_SUCCESS, TD_RESUME, TD_EXPIRY, TD_BOOKED_COMPLETE, VKYC_SUCCESS ]
+            push-config:
+              disabled: false
+              authentication:
+                type: BASIC
+                username: freo-upswing-user
+                url: null
+              notification-url: https://api-grow.freo.app/external/communicationEvent
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS, TD_MATURITY_INSTRUCTION_UPDATE_DUE, VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY ]
+                UL-PERSONAL: [ PL_JOURNEY_CANCELLED, PL_JOURNEY_CREATED, ENACH_INITIATED ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: com.moneytap.bnpl.app
+            firebase-dynamic-link-supported: false
+            firebase-hostname: "NA"
+            deep-link-base: https://freopay.onelink.me/yeJY/5suzafng  # as discussed with product team, this will be a static link for all sms
+
+          SPMY:
+            sms-config:
+              disabled: false
+              principal-id: "110100001282"
+              sender-id: SUPRMY
+              sms-skipped-events:
+                SCC-FD_LIENED: [ TD_RESUME, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, CREDIT_LIMIT_INCREASE_FAILURE, CREDIT_LIMIT_DECREASE_FAILURE, ENABLE_ECOMM_POST_ISSUANCE, TXN_SUSPECTED_FRAUD, SCC_IL_JOURNEY_CREATION, SCC_JOURNEY_CREATION, ENABLE_ECOMM_POST_ISSUANCE, TD_MATURITY_INSTRUCTION_UPDATE_DUE, DIC, TD_WITHDRAWAL_COMPLETE ] # CSS events needs to be fixed
+                FD-REGULAR: [ TD_EXPIRY, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_MATURITY_INSTRUCTION_UPDATE_DUE, TD_WITHDRAWAL_RETRY]
+                FD-SIP: [ TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY]
+            push-config:
+              disabled: false
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              notification-url: https://sm-pandora.super.money/pandora/v1/upswing/events/communication
+              push-skipped-events:
+                SCC-FD_LIENED: [ BIC, CIC, BIC_INIT, CIC_INIT, ENABLED_CARD_CONTROLS, DISABLED_CARD_CONTROLS, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TXN_APPROVED, TXN_SUSPECTED_FRAUD, UPI_TXN_APPROVAL, UPI_TXN_REFUND, TXN_DECLINED_INCREASE_LIMIT, TXN_DECLINED_REPAY, TXN_DECLINED_INCORRECT_PIN, TXN_DECLINED_CARD_CONTROLS, TXN_DECLINED_CARD_PIN_NOT_SET, TXN_DECLINED_USER_LIMIT_BREACH, TXN_DECLINED_ACS_GENERIC, TXN_DECLINED_CARD_FROZEN, TXN_DECLINED_INVALID_CVV, TXN_DECLINED_INVALID_EXPIRY, TXN_DECLINED_SECURITY_REASONS, TXN_DECLINED_DORMANT_CARD, TXN_DECLINED, TXN_DECLINED_INSUFFICIENT_CASH_LIMIT, TXN_DECLINED_WRONG_ACS_OTP, CONSECUTIVE_3_PIN_FAILURE, SCC_CREATION_FAILURE, DISPUTE_RECEIVED, DISPUTE_CREDIT_POSTED, DISPUTE_CREDIT_REVERSED, DISPUTE_RESOLVED_CUSTOMER, DISPUTE_RESOLVED_MERCHANT, LATE_PAYMENT_FEE_CHARGED, PHYSICAL_CARD_FEE_CHARGED, FEE_REVERSAL, MERCHANT_REFUND, REPAYMENT_SUCCESS, REPAYMENT_FAILED, PENDING_TAD_KNOCKED_OFF, ACC_BLOCK, EXCESS_BALANCE_REVERSAL, CARD_ON, CARD_OFF, CARD_BLOCKED, CARD_DELIVERY_REDISPATCH, PIN_SET_SUCCESSFUL, PIN_SET_FAILED, CARD_STATUS_REPLACED, REACTIVATE_CARD, ENABLED_CARD_CONTROLS, DISABLED_CARD_CONTROLS, SCC_IL_JOURNEY_CREATION, SCC_JOURNEY_CREATION, TD_BOOKED_COMPLETE, VKYC_SUCCESS, TD_REJECTED, CARD_DELIVERY_CARD_LOST ] # CSS events needs to be fixed
+                FD-SIP: [ PAYMENT_SUCCESS, TD_MATURITY_INSTRUCTION_UPDATE_DUE, VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_RESUME, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, VKYC_REMINDER, VKYC_RETRY, TD_BOOKED_COMPLETE ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                SCC-FD_LIENED:
+                  - event-type: TXN_SUSPECTED_FRAUD
+            android-app-id: it.supermoney.app
+            firebase-dynamic-link-supported: false
+            firebase-hostname: "NA"
+            deep-link-base: https://super.money
+
+          MNVW:
+            sms-config:
+              disabled: true
+              principal-id: "N/A"
+              sender-id: "N/A"
+              sms-skipped-events:
+                FD-REGULAR: [ ]
+            push-config:
+              disabled: false
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              notification-url: https://fdm-callback.whizdm.com/qarth/external/communicationEvent
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS, TD_MATURITY_INSTRUCTION_UPDATE_DUE, VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_RESUME, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, VKYC_REMINDER, VKYC_RETRY, TD_BOOKED_COMPLETE ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: com.whizdm.moneyview.loans
+            firebase-dynamic-link-supported: false
+            firebase-hostname: ""
+            deep-link-base: mv://fd/upswing/
+
+
+          ARTL:
+            sms-config:
+              disabled: true
+              principal-id: "N/A"
+              sender-id: "N/A"
+              sms-skipped-events:
+                FD-REGULAR: [ ]
+            push-config:
+              disabled: false
+              authentication:
+                type: BEARER
+                username: upswing
+                url: https://fs-external-kong.airtel.in/fs-platform/fd/fs/auth/sign_in
+              notification-url: https://fs-external-kong.airtel.in/fs-platform/fd/fixed-deposit/update/application/communication
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS, TD_MATURITY_INSTRUCTION_UPDATE_DUE, VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_RESUME, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, VKYC_REMINDER, VKYC_RETRY, TD_BOOKED_COMPLETE ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: com.myairtelapp
+            firebase-dynamic-link-supported: false
+            firebase-hostname: ""
+            custom-headers:
+              partner: Upswing
+              correlation-id: Upswing
+            deep-link-base: myairtel://app/fd
+
+          FIBE:
+            sms-config:
+              disabled: false
+              principal-id: "1101660460000011243"
+              sender-id: FIBECO
+              sms-skipped-events:
+                FD-REGULAR: [ TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE, TD_EXPIRY ]
+            push-config:
+              disabled: false
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              notification-url: https://swapi.fibe.in/hubappservice/upSwingCommsWebhook
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: com.earlysalary.android
+            firebase-dynamic-link-supported: false
+            firebase-hostname: ""
+            deep-link-base: https://fibe.onelink.me/BuuV/cwn7z48q # as discussed with product team, this will be a static link for all sms
+
+          ZGGL:
+            sms-config:
+              disabled: false
+              principal-id: "1101468380000011074"
+              sender-id: ZAGGLE
+              sms-skipped-events:
+                FD-REGULAR: [ TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE, TD_EXPIRY ]
+            push-config:
+              disabled: true
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              notification-url: ""
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: com.zaggle
+            firebase-dynamic-link-supported: false
+            firebase-hostname: ""
+            deep-link-base: "" # Deeplink are kept blank, as per regulation we need to migrate to new deeplink format
+
+          BHRF:
+            sms-config:
+              disabled: false
+              principal-id: "1001997490350466982"
+              sender-id: BFDINN
+              sms-skipped-events:
+                FD-REGULAR: [ TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE, TD_EXPIRY ]
+            push-config:
+              disabled: false
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              notification-url: https://prod.v1-api.bharatfd.com/webhooks/communication
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: ""
+            firebase-dynamic-link-supported: false
+            firebase-hostname: ""
+            deep-link-base: ""
+
+          WNTW:
+            sms-config:
+              disabled: false
+              principal-id: "1201160567800085852"
+              sender-id: WINTWL
+              sms-skipped-events:
+                FD-REGULAR: [ TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE, TD_EXPIRY ]
+            push-config:
+              disabled: false
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              notification-url: "https://api.wintwealth.com/fd/upswing/webhook/external/communicationEvent"
+              push-skipped-events:
+                FD-REGULAR: [ TICKET_REPLY, TD_EXPIRY ]
+                FD-SIP: [ TICKET_REPLY, TD_EXPIRY, PAYMENT_SUCCESS ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00            
+            android-app-id: ""
+            firebase-dynamic-link-supported: false
+            firebase-hostname: ""
+            deep-link-base: "https://www.wintwealth.com/fixed-deposit/redirection"
+
+          OLKA:
+            sms-config:
+              disabled: true
+              principal-id: ""
+              sender-id: ""
+              sms-skipped-events:
+                FD-REGULAR: [ ]
+            push-config:
+              disabled: false
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              notification-url: https://api-v2.oolka.in/v2/webhooks/upswing-communication-event
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS ]
+                UL-PERSONAL: [ PL_JOURNEY_CANCELLED, PL_JOURNEY_CREATED, ENACH_INITIATED, POTENTIAL_BANKING_OFFER, PL_JOURNEY_FAILED ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: ""
+            firebase-dynamic-link-supported: false
+            firebase-hostname: ""
+            deep-link-base: ""
+
+          SNMT:
+            sms-config:
+              disabled: true
+              principal-id: ""
+              sender-id: ""
+              sms-skipped-events:
+                FD-REGULAR: [ ]
+            push-config:
+              disabled: false
+              authentication:
+                type: BASIC
+                username: snapmint
+                url: null
+              notification-url: https://super-apis.snapmint.com/v1/external/upswing_communication
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS ]
+                UL-PERSONAL: [ PL_JOURNEY_CANCELLED, PL_JOURNEY_CREATED, ENACH_INITIATED ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id:
+            firebase-dynamic-link-supported: false
+            firebase-hostname: ""
+            deep-link-base:
+
+          PWRP:
+            sms-config:
+              disabled: false
+              principal-id: "1701160645278851841"
+              sender-id: POWRFD
+              sms-skipped-events:
+                FD-REGULAR: [ TD_EXPIRY, PAYMENT_SUCCESS, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE, PAYMENT_REFUND, PRE_MATURED_WITHDRAWAL ]
+            push-config:
+              disabled: false
+              authentication:
+                type: NONE
+                username: ""
+                url: null
+              notification-url: https://pu-callback.powerup.money/v1/upswing/callback/comms
+              push-skipped-events:
+                FD-SIP: [ PAYMENT_SUCCESS ]
+                FD-REGULAR: [ PAYMENT_SUCCESS, VKYC_FAILURE, VKYC_SUCCESS, TD_BOOKED_ACK, TD_REJECTED, TD_MATURITY, TD_RENEWAL_ACK, TD_WITHDRAWAL_ACK,TD_WITHDRAWAL_COMPLETE,TD_WITHDRAWAL_RETRY ]
+                UL-PERSONAL: [ PL_JOURNEY_CANCELLED, PL_JOURNEY_CREATED, ENACH_INITIATED ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id:
+            firebase-dynamic-link-supported: false
+            firebase-hostname: ""
+            deep-link-base: powerup://powerup.money/upswing
+
+          JIRF:
+            sms-config:
+              disabled: false
+              principal-id: "1001397020000055540"
+              sender-id: JIRAAF
+              sms-skipped-events:
+                FD-REGULAR: [ TD_EXPIRY, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE, PAYMENT_REFUND, PRE_MATURED_WITHDRAWAL ]
+            push-config:
+              disabled: true
+              authentication:
+                type: NONE
+                username: ""
+                url: null
+              notification-url: ""
+              push-skipped-events:
+                FD-SIP: [ PAYMENT_SUCCESS ]
+                FD-REGULAR: [ PAYMENT_SUCCESS, VKYC_FAILURE, VKYC_SUCCESS, TD_BOOKED_ACK, TD_REJECTED, TD_MATURITY, TD_RENEWAL_ACK, TD_WITHDRAWAL_ACK,TD_WITHDRAWAL_COMPLETE,TD_WITHDRAWAL_RETRY ]
+                UL-PERSONAL: [ PL_JOURNEY_CANCELLED, PL_JOURNEY_CREATED, ENACH_INITIATED ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: com.app.jiraaf
+            firebase-dynamic-link-supported: true
+            firebase-hostname: jiraaf.page.link/
+            deep-link-base: https://upswing.access.partner
+
+          ETMY:
+            sms-config:
+              disabled: false
+              principal-id: "1601125174617418856"
+              sender-id: "ETMNY"
+              sms-skipped-events:
+                FD-REGULAR: [TD_RESUME, TD_EXPIRY, TD_BOOKED_COMPLETE, TD_BOOKED_ACK, TD_REJECTED, TD_WITHDRAWAL_ACK, TD_WITHDRAWAL_COMPLETE, TD_MATURITY, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, PAYMENT_FAILURE, PAYMENT_SUCCESS, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE, PAYMENT_REFUND, PRE_MATURED_WITHDRAWAL]
+            push-config:
+              disabled: false
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              notification-url: https://apis.smartspends.com/fdwebhook/upswing/communication/add
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS ]
+                UL-PERSONAL: [ PL_JOURNEY_CANCELLED, PL_JOURNEY_CREATED, ENACH_INITIATED ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id:
+            firebase-dynamic-link-supported: false
+            firebase-hostname: ""
+            deep-link-base: ""
+
+          AGRF:
+            sms-config:
+              disabled: false
+              principal-id: "1001377450706658634"
+              sender-id: ALTGRF
+              sms-skipped-events:
+                FD-REGULAR: [ TD_EXPIRY, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE, PAYMENT_REFUND, PRE_MATURED_WITHDRAWAL ]
+            push-config:
+              disabled: true
+              authentication:
+                type: NONE
+                username: ""
+                url: null
+              notification-url: ""
+              push-skipped-events:
+                FD-SIP: [ PAYMENT_SUCCESS ]
+                FD-REGULAR: [ PAYMENT_SUCCESS, VKYC_FAILURE, VKYC_SUCCESS, TD_BOOKED_ACK, TD_REJECTED, TD_MATURITY, TD_RENEWAL_ACK, TD_WITHDRAWAL_ACK,TD_WITHDRAWAL_COMPLETE,TD_WITHDRAWAL_RETRY ]
+                UL-PERSONAL: [ PL_JOURNEY_CANCELLED, PL_JOURNEY_CREATED, ENACH_INITIATED ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: com.app.altgraaf
+            firebase-dynamic-link-supported: true
+            firebase-hostname: altgraaf.page.link
+            deep-link-base: https://upswing.access.partner
+
+          FTFN:
+            sms-config:
+              disabled: true
+              principal-id: ""
+              sender-id: ""
+              sms-skipped-events: {}
+            push-config:
+              disabled: true
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              push-skipped-events: {}
+            ivr-config:
+              disabled: true
+              ivr-enabled-events: {}
+            android-app-id: ""
+            firebase-dynamic-link-supported: false
+            firebase-hostname: ""
+
+          VSTD:
+            sms-config:
+              disabled: false
+              principal-id: "1201160379720443082"
+              sender-id: "VESTED"
+              sms-skipped-events:
+                FD-REGULAR: [ TD_EXPIRY, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE, PAYMENT_REFUND, PRE_MATURED_WITHDRAWAL ]
+            push-config:
+              disabled: false
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              notification-url: https://vested-sidekick-prod.vestedfinance.com/sidekick/corporate-fd/webhooks/communication
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: com.vested.investing.android
+            firebase-dynamic-link-supported: false
+            firebase-hostname: ""
+            deep-link-base: "vestedapp://VestedYieldTabs/AltFD"
+
+          WZMO:
+            sms-config:
+              disabled: false
+              principal-id: "1101483110000084906"
+              sender-id: "WZLY"
+              sms-skipped-events:
+                FD-REGULAR: [ TICKET_ADDED, PAYMENT_REFUND, PRE_MATURED_WITHDRAWAL, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE, TD_EXPIRY ]
+            push-config:
+              disabled: false
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              notification-url: https://api.getonecard.app/WIZMO/5270296789/FD/external/communicationEvent
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS ]
+                UL-PERSONAL: [ PL_JOURNEY_CANCELLED, PL_JOURNEY_CREATED, ENACH_INITIATED ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: ai.wizely.android
+            firebase-dynamic-link-supported: true
+            firebase-hostname: wizely.page.link
+            deep-link-base: https://upswing.access.partner
+
+
+          VDFN:
+            sms-config:
+              disabled: false
+              principal-id: "1101674850000073992"
+              sender-id: VIFIN
+              sms-skipped-events:
+                FD-REGULAR: [ TD_EXPIRY, PAYMENT_SUCCESS, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE, PAYMENT_REFUND, PRE_MATURED_WITHDRAWAL ]
+            push-config:
+              disabled: false
+              authentication:
+                type: BEARER
+                username: "" #dummy username
+                url: "" #VDFN directly provide us with the token , so no need to call external API to fetch token
+              notification-url: https://vishop.myvi.in/o/vil-headless-create-order/v1.0/clickOutWebhook/pushEvent
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS ]
+                UL-PERSONAL: [ PL_JOURNEY_CANCELLED, PL_JOURNEY_CREATED, ENACH_INITIATED ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: com.mventus.selfcare.activity
+            firebase-dynamic-link-supported: false
+            firebase-hostname: ""
+            deep-link-base: https://myvi.in/VI_SHOP_FINANCE/
+
+          PSBZ:
+            sms-config:
+              disabled: false
+              principal-id: "1701157985273421081"
+              sender-id: "PAISFD"
+              sms-skipped-events:
+                FD-REGULAR: [ TD_EXPIRY, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE, PAYMENT_REFUND, PRE_MATURED_WITHDRAWAL ]
+            push-config:
+              disabled: false
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              notification-url: https://api2.paisabazaar.com/investment/v1/partner/3cf84c61-efce-45a0-8149-de18673a486b/webhook/external/communicationEvent
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS, TD_MATURITY_INSTRUCTION_UPDATE_DUE, VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_RESUME, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, VKYC_REMINDER, VKYC_RETRY, TD_BOOKED_COMPLETE ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: ""
+            firebase-dynamic-link-supported: false
+            firebase-hostname: ""
+            custom-headers:
+              x-site-id: 49fbe1dc-d501-4c8b-bc21-e1f4d9626105
+            deep-link-base: https://paisabazaarapp.onelink.me
+
+          SHIV:
+            sms-config:
+              disabled: true
+              principal-id: ""
+              sender-id: ""
+              sms-skipped-events:
+                FD-REGULAR: [ ]
+            push-config:
+              disabled: true
+              authentication:
+                type: NONE
+                username: null
+                url: null
+              notification-url: ""
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS ]
+                UL-PERSONAL: [ PL_JOURNEY_CANCELLED, PL_JOURNEY_CREATED, ENACH_INITIATED ]
+            ivr-config:
+              disabled: true
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: ""
+            firebase-dynamic-link-supported: false
+            firebase-hostname: ""
+            deep-link-base: ""
+
+          CSHE:
+            sms-config:
+              disabled: false
+              principal-id: "1201159178307105365"
+              sender-id: "KRTWLT"
+              sms-skipped-events:
+                FD-REGULAR: [ TD_WITHDRAWAL_RETRY, TD_MATURITY_INSTRUCTION_UPDATE_DUE, PAYMENT_REFUND, PRE_MATURED_WITHDRAWAL, TD_EXPIRY, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY ]
+            push-config:
+              disabled: false
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              notification-url: https://01sx483lhi.execute-api.ap-south-1.amazonaws.com/production/communicationEvent
+              push-skipped-events:
+                FD-SIP: [ VKYC_SUCCESS, TD_WITHDRAWAL_ACK, TD_BOOKED_ACK, TD_REJECTED, TD_RENEWAL_ACK, TD_RENEWAL_COMPLETE, TD_RESUME, TD_EXPIRY, INVEST_INSTANT_FDS, PROGRESS_SAVED, TD_WITHDRAWAL_COMPLETE, TICKET_ADDED, TICKET_CLOSED, TICKET_REPLY, TD_WITHDRAWAL_RETRY, VKYC_REMINDER, VKYC_RETRY, TD_BOOKED_COMPLETE ]
+            ivr-config:
+              disabled: true
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: co.tslc.cashe.android
+            firebase-dynamic-link-supported: true
+            firebase-hostname: karatwealth.in
+            deep-link-base: https://upswing.access.partner
+
+          SMMP:
+            sms-config:
+              disabled: true
+              principal-id: ""
+              sender-id: ""
+              sms-skipped-events:
+                FD-REGULAR: [ ]
+            push-config:
+              disabled: false
+              authentication:
+                type: API_KEY
+                username: null
+                url: null
+              notification-url: https://api-app.summup.in/v1/webhook/upswing/event/communication
+              push-skipped-events:
+                FD-REGULAR: [ ]
+                FD-SIP: [ PAYMENT_SUCCESS ]
+                UL-PERSONAL: [ PL_JOURNEY_CANCELLED, PL_JOURNEY_CREATED, ENACH_INITIATED ]
+            ivr-config:
+              disabled: false
+              ivr-enabled-events:
+                FD-REGULAR:
+                  - event-type: VKYC_REMINDER
+                    eligibility-criteria:
+                      UTKSIN:
+                        min-amount: 5000.00
+                      SURYIN:
+                        min-amount: 5000.00
+                      SMCBIN:
+                        min-amount: 5000.00
+                      NESFIN:
+                        min-amount: 5000.00
+            android-app-id: com.kaching.merchant
+            firebase-dynamic-link-supported: false
+            firebase-hostname: ""
+            deep-link-base: https://summup.in/app/us/pl
+
+  injectExtraSecrets:
+    communications-config:
+      GUPSHUP_SMS_PASSWORD: vault_env
+      GUPSHUP_EMAIL_PASSWORD: vault_env
+      COMMUNICATIONS_TATA_CLIENT_SECRET: vault_env
+      COMMUNICATIONS_CUTTLY_KEY: vault_env
+      MNCT_PUSH_PASSWORD: vault_env
+      STBM_PUSH_PASSWORD: vault_env
+      STBM_API_KEY: vault_env
+      AXCF_API_KEY: vault_env
+      ADBC_API_KEY: vault_env
+      ANGL_AUTH_TOKEN: vault_env
+      VDFN_AUTH_TOKEN: vault_env
+      MOTL_API_KEY: vault_env
+      SPMY_API_KEY: vault_env
+      SMLC_ANALYTICS_PASSWORD: vault_env
+      FREO_ANALYTICS_PASSWORD: vault_env
+      SNMT_ANALYTICS_PASSWORD: vault_env
+      MNVW_API_KEY: vault_env
+      ZGGL_API_KEY: vault_env
+      VNTR_API_KEY: vault_env
+      VNTR_COMMS_API_KEY: vault_env
+      BHRF_API_KEY: vault_env
+      WNTW_API_KEY: vault_env
+      SMMP_API_KEY: vault_env
+      AGRF_API_KEY: vault_env
+      JIRF_API_KEY: vault_env
+      WZMO_API_KEY: vault_env
+      CSHE_API_KEY: vault_env
+      KNOWLARITY_API_KEY: vault_env
+      KNOWLARITY_AUTH_TOKEN: vault_env
+      COMMUNICATIONS_ARTL_CLIENT_SECRET: vault_env
