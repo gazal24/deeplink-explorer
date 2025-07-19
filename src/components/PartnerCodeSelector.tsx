@@ -1,6 +1,8 @@
 import React from 'react';
 import { PartnerCode } from '../types';
 import { useConfig } from '../hooks/useConfig';
+import SearchableDropdown from './SearchableDropdown';
+import './SearchableDropdown.css';
 
 interface PartnerCodeSelectorProps {
   selectedPartner: PartnerCode;
@@ -13,36 +15,32 @@ const PartnerCodeSelector: React.FC<PartnerCodeSelectorProps> = ({
 }) => {
   const { partners, loading, error } = useConfig();
 
-  const handlePartnerChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedCode = event.target.value;
+  const handlePartnerChange = (selectedCode: string) => {
     const partner = partners.find(p => p.code === selectedCode);
     if (partner) {
       onPartnerSelect(partner);
     }
   };
 
+  // Transform partners to dropdown options
+  const partnerOptions = partners.map(partner => ({
+    value: partner.code,
+    label: partner.name,
+    sublabel: partner.baseUrl ? new URL(partner.baseUrl).hostname : undefined
+  }));
+
   return (
     <div className="parameter-group">
       <label>Partner Code</label>
       
-      {loading ? (
-        <div className="loading-message">Loading partners...</div>
-      ) : error ? (
-        <div className="error-message">Error: {error}</div>
-      ) : (
-        <select 
-          value={selectedPartner.code} 
-          onChange={handlePartnerChange}
-          className="parameter-select"
-        >
-          <option value="">Select Partner</option>
-          {partners.map(partner => (
-            <option key={partner.code} value={partner.code}>
-              {partner.name} ({partner.code})
-            </option>
-          ))}
-        </select>
-      )}
+      <SearchableDropdown
+        options={partnerOptions}
+        value={selectedPartner.code}
+        onChange={handlePartnerChange}
+        placeholder="Search partners by name or code..."
+        loading={loading}
+        error={error}
+      />
     </div>
   );
 };
