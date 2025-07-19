@@ -1,0 +1,28 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="oceanGradient" cx="50%" cy="30%" r="80%">
+      <stop offset="0%" style="stop-color:#4da6d9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a2f4a;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Ocean background -->
+  <rect width="32" height="32" rx="6" fill="url(#oceanGradient)"/>
+  
+  <!-- Submarine -->
+  <ellipse cx="12" cy="16" rx="6" ry="3" fill="#ffd700"/>
+  <rect x="6" y="15" width="3" height="2" rx="1" fill="#ffd700"/>
+  <circle cx="15" cy="16" r="1.5" fill="white"/>
+  
+  <!-- Treasure -->
+  <rect x="22" y="20" width="6" height="4" rx="1" fill="#8b4513"/>
+  <rect x="23" y="21" width="4" height="2" fill="#ff6b6b"/>
+  
+  <!-- Sonar beam -->
+  <path d="M18 16 Q22 14 25 18" stroke="#87ceeb" stroke-width="1" fill="none" opacity="0.7" stroke-dasharray="1,1"/>
+  
+  <!-- Bubbles -->
+  <circle cx="10" cy="8" r="1" fill="#87ceeb" opacity="0.8"/>
+  <circle cx="24" cy="6" r="0.8" fill="#87ceeb" opacity="0.7"/>
+  <circle cx="8" cy="6" r="0.6" fill="#87ceeb" opacity="0.6"/>
+</svg>

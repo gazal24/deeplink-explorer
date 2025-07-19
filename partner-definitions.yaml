@@ -1,9 +1,3 @@
-# This is the global definition of Partners that applies system-wide across all environments.
-# It's crucial to maintain consistency in this definition across various environments.
-# This configuration serves as the authoritative source for partner definitions. Any Partner Code (PC) not defined here
-# should be considered invalid for any operation.
-# Furthermore, entries should never be deleted from this file. Once a Partner Code is assigned to an organization, it must
-# not be reused or reassigned to a different partner.
 - partnerCode: EDHS
   name: Edhas
 - partnerCode: ACME

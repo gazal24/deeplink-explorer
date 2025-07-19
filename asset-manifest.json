@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/deeplink-explorer/static/css/main.cb81f3ca.css",
-    "main.js": "/deeplink-explorer/static/js/main.0f02fcdc.js",
+    "main.css": "/deeplink-explorer/static/css/main.6def5e6b.css",
+    "main.js": "/deeplink-explorer/static/js/main.c3de9e8b.js",
     "static/js/453.5129e4fc.chunk.js": "/deeplink-explorer/static/js/453.5129e4fc.chunk.js",
     "index.html": "/deeplink-explorer/index.html",
-    "main.cb81f3ca.css.map": "/deeplink-explorer/static/css/main.cb81f3ca.css.map",
-    "main.0f02fcdc.js.map": "/deeplink-explorer/static/js/main.0f02fcdc.js.map",
+    "main.6def5e6b.css.map": "/deeplink-explorer/static/css/main.6def5e6b.css.map",
+    "main.c3de9e8b.js.map": "/deeplink-explorer/static/js/main.c3de9e8b.js.map",
     "453.5129e4fc.chunk.js.map": "/deeplink-explorer/static/js/453.5129e4fc.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cb81f3ca.css",
-    "static/js/main.0f02fcdc.js"
+    "static/css/main.6def5e6b.css",
+    "static/js/main.c3de9e8b.js"
   ]
 }
