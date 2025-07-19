@@ -23,9 +23,12 @@ class ConfigService {
       }
       
       const yamlText = await response.text();
+      console.log('YAML text loaded, length:', yamlText.length);
       const partnerDefs = yaml.load(yamlText) as PartnerDefinition[];
+      console.log('Parsed partner definitions:', partnerDefs?.length || 0, 'entries');
       
       if (!Array.isArray(partnerDefs)) {
+        console.error('Partner definitions is not an array:', typeof partnerDefs);
         throw new Error('Invalid partner definitions format');
       }
 
@@ -48,6 +51,7 @@ class ConfigService {
       return this.partnersCache;
     } catch (error) {
       console.error('Error loading partner definitions:', error);
+      console.error('Falling back to 3 partners due to YAML parsing failure');
       // Return fallback partners if loading fails
       return this.getFallbackPartners();
     }
