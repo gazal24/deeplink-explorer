@@ -16,8 +16,8 @@ class ConfigService {
     }
 
     try {
-      // Load the YAML file
-      const response = await fetch('/partner-definitions.yaml');
+      // Load the YAML file (use process.env.PUBLIC_URL for correct path in production)
+      const response = await fetch(`${process.env.PUBLIC_URL || ''}/partner-definitions.yaml`);
       if (!response.ok) {
         throw new Error(`Failed to load partner definitions: ${response.status}`);
       }
