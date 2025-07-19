@@ -39,12 +39,13 @@ const DeeplinkGenerator: React.FC = () => {
         
         <ProductTypeSelector
           selectedProductType={config.productType}
-          onProductTypeSelect={(productType) => updateConfig({ productType })}
+          onProductTypeSelect={(productType) => updateConfig({ productType, flowType: '' })}
         />
         
         <FlowTypeSelector
           selectedFlowType={config.flowType}
           onFlowTypeSelect={(flowType) => updateConfig({ flowType })}
+          productType={config.productType}
         />
       </div>
 
