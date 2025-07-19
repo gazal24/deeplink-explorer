@@ -1,6 +1,5 @@
 import React from 'react';
 import { PartnerCode } from '../types';
-import { getPartnerFirebaseHost } from '../utils/firebaseConfig';
 
 interface PartnerCodeSelectorProps {
   selectedPartner: PartnerCode;
@@ -12,14 +11,14 @@ const PartnerCodeSelector: React.FC<PartnerCodeSelectorProps> = ({
   onPartnerSelect
 }) => {
   const partnerCodes: PartnerCode[] = [
-    { name: 'Edhas', code: 'EDHS', baseUrl: 'https://upswing.access.partner', firebaseHost: getPartnerFirebaseHost('EDHS') || undefined },
+    { name: 'Edhas', code: 'EDHS', baseUrl: 'https://upswing.access.partner' },
     { name: 'Acme Corp', code: 'ACME', baseUrl: 'https://upswing.access.partner' },
     { name: 'Acme Corp 2', code: 'ACMT', baseUrl: 'https://upswing.access.partner' },
     { name: 'Acme Corp 3', code: 'ACM3' },
     { name: 'Acme Corp 4', code: 'ACM4' },
     { name: 'Tata Moneyfy', code: 'TCMF', baseUrl: 'https://upswing.access.partner' },
     { name: 'Tata Neu', code: 'TNEU' },
-    { name: 'Stable Money', code: 'STBM', baseUrl: 'https://upswing.access.partner', firebaseHost: getPartnerFirebaseHost('STBM') || undefined },
+    { name: 'Stable Money', code: 'STBM', baseUrl: 'https://upswing.access.partner' },
     { name: 'Onsurity', code: 'ONSR' },
     { name: 'Moneycontrol', code: 'MNCT', baseUrl: 'https://www.moneycontrol.com' },
     { name: 'Ventura Wealth', code: 'VNTR', baseUrl: 'https://vw.ventura1.com/vwdeeplink/vw' },
@@ -91,7 +90,6 @@ const PartnerCodeSelector: React.FC<PartnerCodeSelectorProps> = ({
         {partnerCodes.map(partner => (
           <option key={partner.code} value={partner.code}>
             {partner.name} ({partner.code})
-            {partner.firebaseHost && ` - Firebase: ${partner.firebaseHost}`}
           </option>
         ))}
       </select>
