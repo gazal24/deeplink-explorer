@@ -9,7 +9,7 @@ const DeviceSelector: React.FC<DeviceSelectorProps> = ({
   selectedDevice,
   onDeviceSelect
 }) => {
-  const devices: Array<'iOS' | 'Android'> = ['iOS', 'Android'];
+  const devices: Array<'iOS' | 'Android'> = ['Android', 'iOS'];
 
   return (
     <div className="parameter-group">
