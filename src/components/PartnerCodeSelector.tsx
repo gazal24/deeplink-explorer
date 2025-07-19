@@ -40,7 +40,7 @@ const PartnerCodeSelector: React.FC<PartnerCodeSelectorProps> = ({
     { name: 'Freo Money', code: 'FREO', baseUrl: 'https://freopay.onelink.me/yeJY/5suzafng' },
     { name: 'Moneyview', code: 'MNVW', baseUrl: 'mv://fd/upswing/' },
     { name: 'Zaggle', code: 'ZGGL' },
-    { name: '50Fin', code: 'FTFN' },
+    { name: '50Fin', code: 'FTFN', baseUrl: 'vestedapp://VestedYieldTabs/AltFD' },
     { name: 'PhonePe', code: 'PHPE' },
     { name: 'Fibe (EarlySalary)', code: 'FIBE', baseUrl: 'https://fibe.onelink.me/BuuV/cwn7z48q' },
     { name: 'Amazon', code: 'AMZN' },
