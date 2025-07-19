@@ -11,12 +11,4 @@ export interface DeeplinkConfig {
   flowType: string;
 }
 
-export interface DeeplinkTemplate {
-  ios: string;
-  android: string;
-}
-
-export interface DeeplinkConfigMap {
-  [partnerCode: string]: DeeplinkTemplate;
-}
 

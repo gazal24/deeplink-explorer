@@ -333,6 +333,33 @@
   }
 }
 
+/* Loading and error states */
+.loading-message {
+  padding: 1rem;
+  background: #f7fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  color: #4a5568;
+  font-weight: 500;
+  text-align: center;
+  animation: pulse 2s infinite;
+}
+
+.error-message {
+  padding: 1rem;
+  background: #fed7d7;
+  border: 2px solid #feb2b2;
+  border-radius: 12px;
+  color: #c53030;
+  font-weight: 500;
+  text-align: center;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
 /* Large desktop styles */
 @media (min-width: 1024px) {
   .deeplink-generator {
