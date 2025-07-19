@@ -51,8 +51,26 @@ body {
   }
 }
 
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.header-logo {
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+  transition: transform 0.3s ease;
+}
+
+.header-logo:hover {
+  transform: rotate(5deg) scale(1.05);
+}
+
 .App-header h1 {
-  margin: 0 0 1.5rem 0;
+  margin: 0;
   font-size: 1.75rem;
   font-weight: 700;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -64,8 +82,12 @@ body {
 }
 
 @media (min-width: 768px) {
+  .header-content {
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
   .App-header h1 {
     font-size: 2.5rem;
-    margin-bottom: 2rem;
   }
 }

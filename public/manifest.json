@@ -1,11 +1,16 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Deeplink Explorer",
+  "name": "Deeplink Explorer - Navigate the Depths of Mobile Linking",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "favicon.svg",
+      "sizes": "32x32",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "logo.svg",
+      "sizes": "120x120",
+      "type": "image/svg+xml"
     },
     {
       "src": "logo192.png",
@@ -20,6 +25,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#1e6091",
+  "background_color": "#4da6d9"
 }
