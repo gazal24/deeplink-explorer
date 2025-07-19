@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/deeplink-explorer/static/css/main.db45b949.css",
-    "main.js": "/deeplink-explorer/static/js/main.6443df8f.js",
+    "main.js": "/deeplink-explorer/static/js/main.5f8372eb.js",
     "static/js/453.5129e4fc.chunk.js": "/deeplink-explorer/static/js/453.5129e4fc.chunk.js",
     "index.html": "/deeplink-explorer/index.html",
     "main.db45b949.css.map": "/deeplink-explorer/static/css/main.db45b949.css.map",
-    "main.6443df8f.js.map": "/deeplink-explorer/static/js/main.6443df8f.js.map",
+    "main.5f8372eb.js.map": "/deeplink-explorer/static/js/main.5f8372eb.js.map",
     "453.5129e4fc.chunk.js.map": "/deeplink-explorer/static/js/453.5129e4fc.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.db45b949.css",
-    "static/js/main.6443df8f.js"
+    "static/js/main.5f8372eb.js"
   ]
 }
