@@ -11,7 +11,7 @@ import './DeeplinkGenerator.css';
 const DeeplinkGenerator: React.FC = () => {
   const [config, setConfig] = useState<DeeplinkConfig>({
     partner: { name: '', code: '' },
-    device: 'iOS',
+    device: 'Android',
     productType: 'FD',
     flowType: ''
   });
