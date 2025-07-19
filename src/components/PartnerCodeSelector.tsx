@@ -36,11 +36,13 @@ const PartnerCodeSelector: React.FC<PartnerCodeSelectorProps> = ({
           className="parameter-select"
         >
           <option value="">Select Partner</option>
-          {partners.map(partner => (
-            <option key={partner.code} value={partner.code}>
-              {partner.name} ({partner.code})
-            </option>
-          ))}
+          {partners
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map(partner => (
+              <option key={partner.code} value={partner.code}>
+                {partner.name} ({partner.code})
+              </option>
+            ))}
         </select>
       )}
     </div>
