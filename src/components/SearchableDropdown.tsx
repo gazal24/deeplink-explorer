@@ -52,6 +52,21 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const handleOptionSelect = useCallback((option: Option) => {
+    onChange(option.value);
+    setIsOpen(false);
+    setSearchTerm('');
+    setHighlightedIndex(-1);
+  }, [onChange]);
+
+  const handleInputClick = () => {
+    setIsOpen(true);
+    setSearchTerm('');
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
+
   // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -85,21 +100,6 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, highlightedIndex, filteredOptions, handleOptionSelect]);
-
-  const handleInputClick = () => {
-    setIsOpen(true);
-    setSearchTerm('');
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  };
-
-  const handleOptionSelect = useCallback((option: Option) => {
-    onChange(option.value);
-    setIsOpen(false);
-    setSearchTerm('');
-    setHighlightedIndex(-1);
-  }, [onChange]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
