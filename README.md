@@ -48,12 +48,20 @@ Flow types are based on the `deeplink-guide.pdf` documentation and include:
 - **Support**: View tickets, create tickets, help center
 - **Special FD Categories**: Senior citizen, safest FDs, high return FDs, tax saver FDs
 
+### Partner Selection
+The partner dropdown is now sorted alphabetically for easier navigation through 54+ partner options.
+
 ## Deeplink Structure
 Based on the official Upswing SDK documentation with Firebase host support:
 
-### Standard Deeplink
+### Android Deeplink
 ```
 https://upswing.access.partner/${partnerCode}?action=webview&redirect=${route}
+```
+
+### iOS Deeplink
+```
+upswing-access-partner-${partnerCode}://upswing?route=${route}
 ```
 
 ### Firebase Host Deeplink (for configured partners)
@@ -73,9 +81,13 @@ Partners with Firebase hosts configured:
 
 ### Example Deeplinks
 
-#### Standard Deeplinks
+#### Android Deeplinks
 - Help Center: `https://upswing.access.partner/ACME?action=webview&redirect=deeplink-manager%2Ffd%2FOPEN_HELP_CENTER`
 - Multiple Banks: `https://upswing.access.partner/PHPE?action=webview&redirect=deeplink-manager%2Ffd%2FFSI_FILTER%3FfsiList%3DUTKSIN%7CSMCBIN`
+
+#### iOS Deeplinks
+- Help Center: `upswing-access-partner-acme://upswing?route=deeplink-manager%2Ffd%2FOPEN_HELP_CENTER`
+- Multiple Banks: `upswing-access-partner-phpe://upswing?route=deeplink-manager%2Ffd%2FFSI_FILTER%3FfsiList%3DUTKSIN%7CSMCBIN`
 
 #### Firebase Host Deeplinks
 - Stable Money Help Center: `https://stablemoney.page.link?link=https%3A%2F%2Fupswing.access.partner%2FSTBM%3Faction%3Dwebview%26redirect%3Ddeeplink-manager%252Ffd%252FOPEN_HELP_CENTER`
@@ -88,7 +100,7 @@ Partners with Firebase hosts configured:
 - Chip-style selectors for Device and Product Type (better UX than dropdowns)
 - Dropdown selectors for Partner Code and Flow Type (better for many options)
 - Real-time deeplink preview
-- Copy to clipboard functionality
+- Copy to clipboard functionality with subtle feedback (no popup alerts)
 - "Open Deeplink" button for testing
 
 ### Technical Features
@@ -101,10 +113,11 @@ Partners with Firebase hosts configured:
 
 ### Current State
 - All core functionality is implemented and working
-- Partner codes are hardcoded from YAML file (54+ partners)
+- Partner codes are hardcoded from YAML file (54+ partners) and sorted alphabetically
 - Flow types are hardcoded from PDF guide (14 flows)
-- Device selection is UI-only (doesn't affect deeplink generation)
+- Device selection now affects deeplink generation (iOS uses custom scheme, Android uses HTTPS)
 - Product type selection is available but not currently used in deeplink generation
+- Copy to clipboard shows inline feedback instead of popup alerts
 
 ### Potential Improvements
 - Move partner codes to external configuration file
@@ -122,6 +135,17 @@ Partners with Firebase hosts configured:
 npm start
 ```
 Runs on `http://localhost:3000`
+
+## Deployment
+The app is deployed to GitHub Pages and can be accessed at:
+```
+https://gazal24.github.io/deeplink-explorer/
+```
+
+To deploy updates:
+```bash
+npm run deploy
+```
 
 ## Architecture Decisions
 1. **Hardcoded Data**: Partner codes and flow types are hardcoded for simplicity and reliability
