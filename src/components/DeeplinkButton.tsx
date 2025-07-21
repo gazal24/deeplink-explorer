@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface DeeplinkButtonProps {
   deeplink: string;
@@ -6,6 +6,8 @@ interface DeeplinkButtonProps {
 }
 
 const DeeplinkButton: React.FC<DeeplinkButtonProps> = ({ deeplink, disabled }) => {
+  const [copied, setCopied] = useState(false);
+
   const handleClick = () => {
     if (deeplink) {
       window.open(deeplink, '_blank');
@@ -16,7 +18,8 @@ const DeeplinkButton: React.FC<DeeplinkButtonProps> = ({ deeplink, disabled }) =
     if (deeplink) {
       try {
         await navigator.clipboard.writeText(deeplink);
-        alert('Deeplink copied to clipboard!');
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
       } catch (err) {
         console.error('Failed to copy:', err);
       }
@@ -38,7 +41,7 @@ const DeeplinkButton: React.FC<DeeplinkButtonProps> = ({ deeplink, disabled }) =
         disabled={disabled}
         className="secondary-button"
       >
-        Copy to Clipboard
+        {copied ? 'Copied!' : 'Copy to Clipboard'}
       </button>
     </div>
   );
