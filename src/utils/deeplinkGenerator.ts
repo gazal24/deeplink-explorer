@@ -1,16 +1,21 @@
 import { DeeplinkConfig } from '../types';
 
 export const generateDeeplink = (config: DeeplinkConfig): string => {
-  const { partner, flowType } = config;
+  const { partner, device, flowType } = config;
   
   if (!partner.code || !flowType) {
     return '';
   }
 
-  // Determine the base URL for the partner
+  // For iOS, use the special scheme pattern
+  if (device === 'iOS') {
+    const scheme = `upswing-access-partner-${partner.code.toLowerCase()}`;
+    const encodedRoute = encodeURIComponent(flowType);
+    return `${scheme}://upswing?route=${encodedRoute}`;
+  }
+
+  // For Android, keep the existing pattern
   const baseUrl = partner.baseUrl || 'https://upswing.access.partner';
-  
-  // For standard deeplinks, encode the route for URL safety
   const encodedRoute = encodeURIComponent(flowType);
   return `${baseUrl}/${partner.code}?action=webview&redirect=${encodedRoute}`;
 };
